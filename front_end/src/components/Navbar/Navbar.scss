@@ -1,0 +1,115 @@
+.navbar{
+    width:100%;
+    border:1px solid blue;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    position:sticky;
+    max-width:75px;
+
+    .img{
+        .Heart_img{
+            aspect-ratio:1/1;
+            max-width:2.5rem;
+            margin:1.5rem 0;
+            box-sizing: border-box;
+        }
+    }
+
+    .options_center{
+         width:100%;
+         box-sizing: border-box;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+
+         
+
+         .nav_tab{
+            margin:1rem 0;
+            display: flex;
+            position: relative;
+            width:inherit;
+            list-style: none;
+            justify-content: center;
+            cursor: pointer;
+            
+
+            .orange_border{
+              border:1px solid #f9a109;
+              background-color: #f9a109;
+              border-top-right-radius:5px;
+              border-bottom-right-radius:5px;
+              width:0.2rem;
+              position:absolute;
+              height:100%;
+              left:0;
+              right:0;
+              opacity:0;
+              transition-delay:100ms;
+            }
+            .material-icons{
+                font-size:1.7rem;
+                padding:0.8rem;
+                color:rgba(69, 69, 69, 1);
+            }
+        }
+
+    }
+
+
+
+
+
+    .cart{
+        margin:1.5rem 0;
+        position: relative;
+        .material-icons-outlined{
+            font-size:1.5rem;
+            background-color: #f9a109;
+            color:white;
+            padding:0.5rem;
+            border-radius:50%;
+        }
+        .cart_count{
+            position: absolute;
+            top:-5px;
+            right:-5px;
+            background: rgba(235, 87, 87, 1);
+            padding:0;
+            width:20px;
+            height:20px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius:5px;
+            color: white;
+        }
+
+    }
+
+}
+
+@keyframes tab_select {
+    0%{
+         transform:translateY(-5%);
+    }
+    50%{
+         transform: translateY(10%);
+    }
+    100%{
+        transform: translateY(0);
+    }
+
+}
+
+.tab_active{
+    .orange_border{
+        opacity:1 !important;
+        animation: tab_select 500ms;
+    }
+ }
