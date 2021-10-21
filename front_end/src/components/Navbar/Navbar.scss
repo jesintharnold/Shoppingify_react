@@ -26,8 +26,6 @@
          align-items: center;
          justify-content: center;
 
-         
-
          .nav_tab{
             margin:1rem 0;
             display: flex;
@@ -36,6 +34,48 @@
             list-style: none;
             justify-content: center;
             cursor: pointer;
+            align-items: center;
+
+
+            &:hover{
+                .tooltip{
+                    visibility: visible;
+                }
+                
+             }
+
+            .tooltip{
+                position:absolute;
+                left:100%;
+                display: inline-block;
+                width:auto;
+                text-align: center;
+                font-weight:500;
+                background:rgba(69, 69, 69, 1);
+                color: white;
+                border-radius:5px;
+                padding:0.35rem;
+                visibility: hidden;
+                transition:visibility 100ms ease-in;
+                font-size:1rem;
+
+
+
+                
+                &::before{
+                    content:" ";
+                    position:absolute;
+                    width:0px;
+                    height:0px;
+                    border:8px solid transparent;
+                    transform: translate(20%,-50%);
+                    border-right-color:rgba(69, 69, 69, 1);
+                    top: 50%; right: 100%;
+                }
+
+                 
+
+            }
             
 
             .orange_border{

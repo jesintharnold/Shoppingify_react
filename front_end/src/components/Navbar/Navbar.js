@@ -13,17 +13,17 @@ function Navbar() {
          <NavLink className="nav_tab" exact to="/" activeClassName='tab_active'>
          <span className="orange_border"></span>  
          <span className="material-icons">list</span>
-         {/* <span className="tooltip">items</span>  */}
+         <span className="tooltip">items</span> 
          </NavLink>
          <NavLink className="nav_tab" exact to="/history" activeClassName='tab_active'>
          <span className="orange_border"></span> 
          <span className="material-icons">history</span>
-         {/* <span className="tooltip">history</span>  */}
+         <span className="tooltip">history</span> 
          </NavLink>
          <NavLink  className="nav_tab" exact to="/analytics" activeClassName='tab_active'>
          <span className="orange_border"></span> 
          <span className="material-icons">insert_chart_outlined</span>
-         {/* <span className="tooltip">Analytics</span>  */}
+         <span className="tooltip">Analytics</span> 
          </NavLink>
        </ul>
        <div className="cart">
