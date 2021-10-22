@@ -1,0 +1,17 @@
+[
+    {
+    "path":"/",
+    "icon":"list",
+    "tooltip":"Items"
+    },
+    {
+    "path":"/history",
+    "icon":"history",
+    "tooltip":"History"
+    },
+    {
+    "path":"/analytics",
+    "icon":"insert_chart_outlined",
+    "tooltip":"Analytics"
+    }
+]

@@ -1,15 +1,15 @@
 body,html{
   margin: 0;
 }
-
-
-body,#root{
-  width:100%;
-  min-height:100vh;
-  margin:0;
-  padding:0;
+body{
+  position: relative;
 }
+
 #root{
   display:grid;
-  grid-template-columns:0.2fr 2.1fr;
+  grid-template-columns:auto 2.1fr;
+  position: relative;
+  width:100%;
+  box-sizing: border-box;
+  height: calc(var(--vh, 1vh) * 100);
 }

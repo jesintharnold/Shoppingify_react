@@ -1,13 +1,12 @@
 .navbar{
     width:100%;
-    border:1px solid blue;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
-    position:sticky;
-    max-width:75px;
+    max-width:70px;
+    background-color:#f7f7f2;
 
     .img{
         .Heart_img{
@@ -19,34 +18,36 @@
     }
 
     .options_center{
-         width:100%;
          box-sizing: border-box;
          display: flex;
          flex-direction: column;
          align-items: center;
-         justify-content: center;
+         list-style: none;
+         padding:0 !important;
+         width:100%;
+
 
          .nav_tab{
             margin:1rem 0;
             display: flex;
             position: relative;
-            width:inherit;
+            width:100%;
             list-style: none;
             justify-content: center;
             cursor: pointer;
             align-items: center;
-
-
-            &:hover{
+            text-decoration: none;
+    
+            &:hover,&:active{
                 .tooltip{
                     visibility: visible;
+                    animation:tab_select 1s ;
                 }
-                
              }
 
             .tooltip{
                 position:absolute;
-                left:100%;
+                left:110%;
                 display: inline-block;
                 width:auto;
                 text-align: center;
@@ -56,12 +57,9 @@
                 border-radius:5px;
                 padding:0.35rem;
                 visibility: hidden;
-                transition:visibility 100ms ease-in;
+                transition:visibility 50ms ease-out;
                 font-size:1rem;
 
-
-
-                
                 &::before{
                     content:" ";
                     position:absolute;
@@ -99,11 +97,6 @@
         }
 
     }
-
-
-
-
-
     .cart{
         margin:1.5rem 0;
         position: relative;
@@ -131,9 +124,7 @@
         }
 
     }
-
 }
-
 @keyframes tab_select {
     0%{
          transform:translateY(-5%);
@@ -144,12 +135,12 @@
     100%{
         transform: translateY(0);
     }
-
 }
-
 .tab_active{
     .orange_border{
         opacity:1 !important;
         animation: tab_select 500ms;
     }
  }
+
+
