@@ -10,7 +10,7 @@
     
     
     .title{
-    font-size:1.7rem;
+    font-size:1.5rem;
     font-weight:700;
       span{
           color:#F9A109;
@@ -24,8 +24,9 @@
         border-radius:0.8rem;
         border:1px solid transparent;
         width:13rem;
-        overflow: hidden;
+        // overflow: hidden;
         background-color: #FFFFFF;
+
 
         span{
            font-size:1.5rem;
@@ -38,10 +39,10 @@
             padding:0;
             background-color: transparent;
             font-size:1.05rem;
-            width:100%;
             border:none;
             color:rgb(63, 63, 63);
-
+            width:0;
+            flex-grow: 1;
             &::placeholder{
                 color: rgba(189, 189, 189, 1);
             }
@@ -49,8 +50,5 @@
         }
 
     }
-
-
-
 
 }
