@@ -1,0 +1,39 @@
+.Item{
+    box-sizing: border-box;
+    width:100%;
+    font-family: 'Quicksand';
+    .Item_name{
+        font-size:1.175rem;
+    }
+
+    .Item_list{
+        margin:2rem 0  ;
+        gap:1.5rem;
+        display: flex;
+        flex-wrap: wrap;
+
+        .Item_btn{
+            display: flex;
+            align-items: center;
+            padding:0.65rem;
+            font-family: inherit;
+            outline: none;
+            box-sizing: border-box;
+            border:none;
+            background-color: rgba(255, 255, 255, 1);
+            border-radius:0.75rem;
+            box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.07);
+            flex-direction: row;
+            span:nth-child(2){
+                color: rgba(193, 193, 196, 1);
+            }
+            span:nth-child(1){
+                margin-right:0.5rem;
+                line-height:1.5rem;
+            }
+        }
+    }
+
+}
+
+
