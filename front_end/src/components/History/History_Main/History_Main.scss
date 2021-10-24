@@ -1,0 +1,67 @@
+.History_main{
+    font-family: Quicksand;
+    box-sizing: border-box;
+
+    .history_month_year{
+        margin:1.5rem 0;
+        display: block;
+    }
+
+    .list_name{
+        font-size:1rem;
+    }
+
+    .history_main_name{
+        font-size:1.5rem;
+        margin:1.5rem 0 2rem 0;
+    }
+
+
+    .history_container{
+        width:100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-sizing: border-box;
+        padding:1.5rem 2rem;
+        background-color:rgba(255, 255, 255, 1);
+        box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.05);
+        border-radius:1rem;
+        margin-bottom:1rem;
+
+    
+        span:nth-child(1){
+            
+            font-size: 1.175rem;
+            color: rgba(0, 0, 0, 0.8);
+            
+        }
+        .date_data{
+            display: flex;
+            align-items: center;
+            color:rgb(145, 145, 145);
+            box-sizing: border-box;
+            gap:1rem;
+
+            .material-icons{
+                font-size:1.4rem;
+            }
+            span:nth-child(2){
+                color:rgba(193, 193, 196, 1);
+                font-size:0.95rem;
+            }
+            .status{
+                border:1px solid rgba(86, 204, 242, 1);
+                padding:0.2rem;
+                font-size:0.8rem;
+                border-radius:0.5rem;
+                color:rgba(86, 204, 242, 1);
+             
+            }
+            .navigate{
+                color:#F9A109;
+                font-size:1.5rem;
+            }
+        }
+    }
+}

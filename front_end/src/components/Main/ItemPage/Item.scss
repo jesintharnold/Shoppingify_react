@@ -5,13 +5,11 @@
     .Item_name{
         font-size:1.175rem;
     }
-
     .Item_list{
         margin:2rem 0  ;
         gap:1.5rem;
         display: flex;
         flex-wrap: wrap;
-
         .Item_btn{
             display: flex;
             align-items: center;
@@ -31,9 +29,11 @@
                 margin-right:0.5rem;
                 line-height:1.5rem;
             }
+            &:hover{
+                background-color: #f7f7f2;
+            }
         }
     }
-
 }
 
 

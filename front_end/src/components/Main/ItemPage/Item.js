@@ -39,7 +39,7 @@ return (
           </button>
 
           <button className="Item_btn">
-          <span>Chicken leg box</span>
+          <span>Chicken</span>
           <span class="material-icons">add</span>
           </button>
 
