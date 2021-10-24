@@ -1,0 +1,62 @@
+.History_expand{
+    margin:2rem 0 0 0;
+    font-family: Quicksand;
+
+    a{
+        display: flex;
+        align-items: center;
+        gap:0.5rem;
+        margin:0 0 1.5rem 0;
+        color:#F9A109;
+        font-size:1.3rem;
+    }
+
+    .List_name{
+        font-size:1.3rem;
+        margin:0 0 0.5rem 0;
+    }
+
+    .date_list{
+        display: flex;
+        align-items: center;
+        gap:0.6rem;
+        font-size:0.9rem;
+        color:rgb(158, 158, 161);
+        margin-bottom:2rem;
+    }
+
+
+    .History_items{
+        .container_name{
+            font-size:1.25rem;
+        }
+
+        .his_itm{
+            display: flex;
+            flex-wrap: wrap;
+            margin:1.5em 0;
+            gap:1.5rem;
+            .his_itm_container{
+               display: flex;
+               gap:1rem;
+               align-items: center;
+               box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.05);
+               background-color: rgba(255, 255, 255, 1);
+               padding:0.8rem;
+               border-radius:0.8rem;
+               font-size:0.95rem;
+               color: rgba(0, 0, 0, 1);
+
+            
+              span:nth-child(2){
+                  font-size:0.8rem;
+                  color: rgba(249, 161, 10, 1);
+
+            }
+            }
+        }
+    }
+    
+
+
+}
