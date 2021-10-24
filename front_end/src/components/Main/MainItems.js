@@ -3,6 +3,7 @@ import Item from './ItemPage/Item';
 import "./MainItems.scss";
 import HistoryMain from '../History/History_Main/History_Main';
 import HistoryExpand from '../History/History_Expand/HistoryExpand';
+import Analytics from '../Analytics/Analytics';
 function Mainitem(){
     return (
         <div className="Main_items">
@@ -10,7 +11,9 @@ function Mainitem(){
         <Item/> */}
 
         {/* <HistoryMain/> */}
-        <HistoryExpand/>
+        {/* <HistoryExpand/> */}
+
+        <Analytics/>
         </div>
     )
 }
