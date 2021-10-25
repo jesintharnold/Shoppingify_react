@@ -1,4 +1,5 @@
 import './Analytics.scss';
+import Analyticschart from './Analyticscharts/Analytichart';
 import Analyticprogress from './AnalyticsProgress/ProgressAnalytics';
 
 function Analytics(){
@@ -17,9 +18,9 @@ function Analytics(){
             <Analyticprogress item="Banana-4" className="blue" progressval={20} />
             <Analyticprogress item="Banana-5" className="blue" progressval={10} />
             <Analyticprogress item="Banana-6" className="blue" progressval={70} />
-            
             </div>
             </div>
+             <Analyticschart/>
 
         </div>
         )
