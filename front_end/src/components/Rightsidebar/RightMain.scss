@@ -5,12 +5,102 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    // position:fixed;
 
   .width_90{  
-    width:80%;
+    width:85%;
     height:100%;
-    margin-top:2.2rem;
+    margin-top:2rem;
+    position: relative;
+
+
+    .category{
+        .cat_name{
+            color: rgba(130, 130, 130, 1);
+            margin-bottom:1rem;
+            display: block;
+        }
+        .category_item{
+            display: flex;
+            width:100%;
+            position: relative;
+            justify-content: space-between;
+            align-items: center;
+            
+
+            .pcs{
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                color:black;
+                align-items: center;
+                background-color: transparent;
+                gap:0.5rem;     
+                transition:visibility 0.25s ease-in;
+                padding:0.2rem;
+                border-radius:0.5rem;
+                
+                &:hover{
+                    button{
+                     opacity:1;
+                     visibility: visible;
+                    }
+
+                    background-color:white;
+                }
+
+                button{
+                    border:none;
+                    background-color: transparent;
+                    outline: none;
+                    span{
+                        font-size:1.5rem;
+                        color:rgba(249, 161, 9, 1);
+                    }
+                   opacity:0;
+                   visibility: hidden;
+                }
+                .delete{
+                    background: rgba(249, 161, 9, 1);
+                    border-radius:0.5rem;
+
+                    span{
+                        color:white;
+                    }
+                }
+                .No_pcs{
+                    border: 2px solid rgba(249, 161, 9, 1);
+                    border-radius:1rem;
+                    padding:0.2rem 0.4rem 0.2rem 0.4rem;
+                    font-size:0.9rem;
+                    color: #F9A10A;
+                    opacity:1;
+                }
+            }
+        }
+    }
+
+ 
+    .shopping_list_name{
+        margin-bottom:1rem;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom:1rem;
+        align-items: center;
+        p{
+            font-size:1.25rem;
+        }
+        span{
+            font-size:1.2rem;
+        }
+        button{
+             border:none;
+             background-color: transparent;
+             outline: none;
+        }
+    }
+
+
+
 
     .bottle_left{
         width:100%;
@@ -21,6 +111,7 @@
         box-sizing: border-box;
         align-items: center;
         border-radius:1rem;
+        margin-bottom:1.3rem;
         div:nth-child(1){
             margin-top:-2rem;
         }
