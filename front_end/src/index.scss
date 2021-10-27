@@ -3,13 +3,13 @@ body,html{
 }
 body{
   position: relative;
-  background-color: rgba(213, 213, 219,0.5);
+  background-color:#eeeeee;
 
 }
 
 #root{
   display:grid;
-  grid-template-columns:auto 2.1fr;
+  grid-template-columns:auto 2fr auto;
   position: relative;
   width:100%;
   box-sizing: border-box;

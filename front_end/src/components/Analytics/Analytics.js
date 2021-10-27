@@ -20,7 +20,7 @@ function Analytics(){
             <Analyticprogress item="Banana-6" className="blue" progressval={70} />
             </div>
             </div>
-             <Analyticschart/>
+            <Analyticschart/>
 
         </div>
         )

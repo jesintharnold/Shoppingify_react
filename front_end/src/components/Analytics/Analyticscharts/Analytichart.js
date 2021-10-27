@@ -7,7 +7,7 @@ function Analyticschart(){
     return (  
         <div className='analytics_chart'>
          <div className='chart_name'>Monthly Summary</div>
-        <ResponsiveContainer  width="90%" aspect={3}>
+        <ResponsiveContainer  width="100%" aspect={3} >
           <LineChart data={data}>
             <CartesianGrid strokeDasharray="5" stroke="#aaa" />
             <XAxis dataKey="name" strokeDasharray="3" stroke="#707070" style={{fontSize:'0.8rem'}}/>

@@ -1,37 +1,27 @@
 .analytics_main{
-    width:70%;
-    margin:1.5rem 0 0 2rem;
+    width:85%;
+    margin:1.5rem 0 0 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     font-family: Quicksand;
+    height: fit-content;
 
     .analytic_progress_container{
         margin-bottom:2rem;
         display: flex;
-        flex-wrap: wrap;
-       
-        
-
+        flex-wrap: nowrap;
+        gap:5rem;
         .ana_prog_cont_name{
             display: block;
             font-size:1.1rem;
             line-height:1.8rem;
-            margin-bottom:1.8rem;
-
+           margin-bottom:1.8rem;
         }
-        
-
         .left_prog_cont{
         flex:0.5;
         }
-
         .right_prog_cont{
         flex:0.5;
         }
-
     }
-
-
-
 }
