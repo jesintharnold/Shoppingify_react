@@ -1,0 +1,91 @@
+.category_item{
+    display: flex;
+    width:100%;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom:0.5rem;
+    p{
+        font-size:0.9rem;
+        max-width:5rem;
+        // overflow: hidden;
+       
+    }
+    .pcs{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        color:black;
+        align-items: center;
+        background-color: transparent;
+        gap:0.5rem;     
+        transition:all 1s ease-out;
+        padding:0.2rem;
+        border-radius:0.5rem;
+        &:hover{
+            @keyframes left_pcs {
+                from{
+                    transform: translateX(100%);
+                }
+                to{
+                    transform: translateX(0%);
+                    
+                }
+            }
+            @keyframes rgt_pcs {
+                from{
+                    transform:translateX(-100%);
+                }
+                to{
+                    transform: translateX(0%);
+                    
+                }
+            }
+            background-color: white;
+            .lft_pcs{
+                  animation: left_pcs 1s;
+                  display: flex;
+            }
+            .rght_pcs{
+               animation: rgt_pcs 1s;
+               display: block;
+            }
+        }
+        button{
+            border:none;
+            background-color: transparent;
+            outline: none;
+            span{
+                font-size:1.5rem;
+                color:rgba(249, 161, 9, 1);
+            }
+        }
+        .lft_pcs{
+            .delete{
+                background: rgba(249, 161, 9, 1);
+                border-radius:0.5rem;
+
+                span{
+                    color:white;
+                }
+            }
+            z-index:1;
+            display: none;
+        }
+
+        .rght_pcs{
+            z-index:1;
+            display: none;
+        }
+
+        .No_pcs{
+            border: 2px solid rgba(249, 161, 9, 1);
+            border-radius:1rem;
+            padding:0.2rem 0.3rem 0.2rem 0.3rem;
+            font-size:0.8rem;
+            color: #F9A10A;
+            opacity:1;
+            z-index:5;
+        }
+    }
+}

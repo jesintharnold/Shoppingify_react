@@ -1,5 +1,6 @@
 import './RightMain.scss';
 import bottle from '../../Assests/bottle.svg';
+import Exbtn from './ExpandaleBtn/ExBtn';
 function Rightmainbar(){
     return(
 <div className="RightMain">
@@ -24,28 +25,12 @@ function Rightmainbar(){
     </button>
 </div>
 
+
+
 <div className="category">
     <span className="cat_name">Fruit and vegetables</span>
-    <div className="category_item">
-        <p>Acocado  </p>
-
-        <div className="pcs">
-        <button className="delete">
-        <span class="material-icons">delete_outline</span>
-        </button>
-
-        <button>
-        <span class="material-icons">remove</span>
-        </button>
-
-        <div className="No_pcs">3 pcs</div>
-  
-        <button>
-        <span class="material-icons">add</span>
-        </button>
-
-        </div>
-    </div>
+    <Exbtn name={'Avocodosssdsssssssssssssssss'} itm_cnt={3}/>
+    <Exbtn name={'Avocodo'} itm_cnt={3}/>
 </div>
 
 </div>
