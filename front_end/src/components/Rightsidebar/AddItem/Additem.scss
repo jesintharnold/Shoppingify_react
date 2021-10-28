@@ -1,0 +1,61 @@
+.Add_item_main{
+    background-color:white;
+    font-family:Quicksand;
+    font-weight:normal;
+    line-height:1.8rem;
+    width:100%;
+    color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+
+    .width_form_90{
+        margin-top:1rem;
+        width:85%;
+        p{
+           font-size:1.2rem;
+           margin-bottom:1rem;
+        }
+
+        form{
+            width:100%;
+            div{
+                width:100%;
+                margin-bottom:1rem;
+                display: flex;
+                flex-direction: column-reverse;
+
+                label{
+                    font-size:0.85rem;
+                    margin-bottom:0.1rem;
+                }
+
+                textarea,input{
+                    border: 2px solid rgba(189, 189, 189, 1);
+                    outline:none;
+                    height:2.8rem;
+                    padding-left:0.8rem;
+                    border-radius:0.5rem;
+
+                    &:focus{
+                        border-color:#f9a109;
+
+                        +label{
+                            color:#f9a109;
+                        }
+                    }
+                }
+
+            }
+
+                #note{
+                    height:5rem;
+                    resize: none;
+                    padding-top:0.5rem;
+                    box-sizing: border-box;
+                }
+
+          }
+
+
+        }
+    }

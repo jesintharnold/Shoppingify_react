@@ -9,6 +9,7 @@ function Rightmainbar(){
 
 <div className="width_90">
 {/* Fist_container */}
+<>
 <div className="bottle_left">
 <div>
 <img src={bottle} width="100%"  alt="Not found"/>
@@ -18,6 +19,7 @@ function Rightmainbar(){
 <button>Add item</button>
 </div>
 </div>
+
 {/*End of  fist_container */}
 <div className="shopping_list_name">
     <p>Shopping list</p>
@@ -30,7 +32,11 @@ function Rightmainbar(){
     <Exbtn name={'Avocodosssdsssssssssssssssss'} itm_cnt={3}/>
     <Exbtn name={'Avocodo'} itm_cnt={3}/>
 </div>
+</>
+
+
 </div>
+
 <Optioncontainer/>
 </div>
     );
