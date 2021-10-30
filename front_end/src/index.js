@@ -13,7 +13,7 @@ ReactDOM.render(
     <Navbar/> 
     <Mainitem/>
     </Router>
-    <Additem/>
+    <Rightmainbar/>
   </React.StrictMode>,
   document.getElementById('root')
 );

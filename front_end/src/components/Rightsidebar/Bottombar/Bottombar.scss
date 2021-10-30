@@ -60,11 +60,16 @@
         font-size:1rem;
         background-color: transparent;
         font-family:Quicksand;
+        border-radius:0.5rem;
     }
     ._complete{
         background: rgba(86, 204, 242, 1);
         color:white;
-        border-radius:0.5rem;
+        
+    }
+    ._save{
+        background: rgba(249, 161, 9, 1);
+        color:white;
     }
 }
 

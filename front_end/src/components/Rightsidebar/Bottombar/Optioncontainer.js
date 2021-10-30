@@ -1,11 +1,11 @@
 import './Bottombar.scss';
 
-function Optioncontainer(){
+function Optioncontainer({save_bt,className,onfunc1,onfunc2}){
     return (
         <div className="container">
         <div className="Option_flex">
-            <button className="cancel">cancel</button>
-            <button className="_complete">Complete</button>
+            <button className="cancel" onClick={()=>onfunc2()}>cancel</button>
+            <button className={className} onClick={(e)=>onfunc1(e)}>{save_bt}</button>
         </div>
         </div>
     )
