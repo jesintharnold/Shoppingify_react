@@ -1,0 +1,22 @@
+{  
+    "_Id":"000001",
+    "name":"Shopping - 1",
+    "Items":[
+        {
+            "category":{
+                "name":"Fruits and vegetables",
+                "_Id":"000000000000000002345"
+            },
+            "items":[
+                {
+                "name":"Avocodo",
+                "quantity":3,
+                "_Id":"00000000000000256"
+                }
+            ]
+        }
+
+        ]
+}
+
+
