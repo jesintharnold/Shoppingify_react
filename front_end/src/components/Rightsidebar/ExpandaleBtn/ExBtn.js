@@ -1,7 +1,7 @@
 import React from 'react';
 import './ExBtn.scss';
 
-function Exbtn({Inc,Dec,cat_name,items}){
+function Exbtn({Inc,Dec,cat_name,items,Del}){
 
     return (
         <React.Fragment>
@@ -12,7 +12,7 @@ function Exbtn({Inc,Dec,cat_name,items}){
         <p>{Itm.name}</p>
         <div className="pcs">
         <div className="lft_pcs">    
-        <button className="delete"><span className="material-icons">delete_outline</span></button>
+        <button className="delete" onClick={()=>Del({category_name:cat_name,name:Itm.name})}><span className="material-icons">delete_outline</span></button>
         <button onClick={()=>Dec({category_name:cat_name,name:Itm.name})}> <span className="material-icons">remove</span></button>
         </div>
         <div className="No_pcs">{`${Itm.quantity} pcs`}</div>

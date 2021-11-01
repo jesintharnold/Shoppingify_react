@@ -11,10 +11,10 @@ import * as Creator from '../../Redux/ActionCreators';
 
 import { useSelector } from 'react-redux';
 
-function Rightmainbar({Increment,Decrement,cartData,cartLoading,cartName}){
+function Rightmainbar({Increment,Decrement,cartData,cartLoading,cartName,Delete}){
     const [tab,setTab]=useState('');
 
-    const data_=useSelector(state=>state.items.data);
+    
 
 return(
 <div className='_main_bar'>       
@@ -39,10 +39,9 @@ return(
 {cartData.map(
     ({category,items},index)=>(
         
-        <Exbtn Inc={Increment} Dec={Decrement} cat_name={category.name} items={items} key={`cat-${index}`}/>
+        <Exbtn Inc={Increment} Dec={Decrement} cat_name={category.name} Del={Delete} items={items} key={`cat-${index}`}/>
     ))}
 
-{console.log(data_[0].items[0].quantity)}
 </div>
 </div>
 <Optioncontainer save_bt={`Complete`} className={`_complete`}/>
@@ -64,7 +63,8 @@ return{
 const mapDispatchtoProps=dispatch=>{
 return {
     Increment:(data)=>dispatch(Creator.IncCartQty(data)),
-    Decrement:(data)=>dispatch(Creator.DecCartQty(data))
+    Decrement:(data)=>dispatch(Creator.DecCartQty(data)),
+    Delete:(data)=>dispatch(Creator.DeleteCartItem(data))
 }
 } 
 export default connect(mapStatetoProps,mapDispatchtoProps)(Rightmainbar)

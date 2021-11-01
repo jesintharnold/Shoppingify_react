@@ -25,6 +25,15 @@ export const CartLoading=()=>{
     }
 }
 
+export const DeleteCartItem=(payload)=>{
+    return {
+        type:Actiontypes.DELETE_CART_ITEM,
+        payload:payload
+        // payload ---> {name:name,category_name}
+        
+    }
+}
+
 // GETCARTASYNC
 // SAVECARTASYNC
 

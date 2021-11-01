@@ -76,6 +76,25 @@ export const CartReducer=(state=InitialState,{type,payload})=>{
                Loading:true
            }
        }
+
+       case Actiontypes.DELETE_CART_ITEM:{
+
+          let Itms=state.data.filter(({category,items})=>(category.name===payload.category_name))[0].items.length;
+          if(Itms===1){
+              console.log(state.data.filter(({category})=>category.name!==payload.category_name));
+            return {
+                ...state,
+                data:state.data.filter(({category})=>category.name!==payload.category_name)
+            }
+          }else{
+            return {
+                ...state,
+                data:state.data.map((cat)=>cat.category.name===payload.category_name?Object.assign({},cat,{
+                    items:cat.items.filter((Pro)=>Pro.name!==payload.name)
+                }):cat)
+            }
+          }
+       }
         
        default:
             return state;
