@@ -3,8 +3,40 @@ import {Actiontypes} from './ActionConstant';
 const InitialState={
     Loading:false,
     Error:null,
-    name:"",
-    data:[]
+    name:"Test-1",
+    data:[
+        {
+            "category":{
+                "name":"Fruits and vegetables",
+                "_Id":"000000000000000002345"
+            },
+            "items":[
+                {
+                "name":"Avocodo",
+                "quantity":3,
+                "_Id":"00000000000000256"
+                },
+                {
+                    "name":"cod",
+                    "quantity":3,
+                    "_Id":"00000000000000256"
+                }
+            ]
+        },
+        {
+            "category":{
+                "name":"Fruits",
+                "_Id":"000000000000000002345"
+            },
+            "items":[
+                {
+                "name":"cod",
+                "quantity":3,
+                "_Id":"00000000000000256"
+                }
+            ]
+        }
+    ]
 };
 
 export const CartReducer=(state=InitialState,{type,payload})=>{
@@ -19,15 +51,23 @@ export const CartReducer=(state=InitialState,{type,payload})=>{
        }
 
        case Actiontypes.INCREMENT_CART_QTY:{
-             let inc=state.Items.filter(({category})=>category===payload.category_name).items.find((itm)=>itm.name===payload.name);
-             inc.quantity+=1;
-             break;
+           console.log(state);
+           return {
+               ...state,
+               data:state.data.map((cat)=>cat.category.name===payload.category_name?Object.assign({},cat,{
+                   items:cat.items.map((Pro)=>Pro.name===payload.name?{...Pro,quantity:Pro.quantity+1}:Pro)
+               }):cat)
+            }
+             
        }
         
        case Actiontypes.DECREMENT_CART_QTY:{
-           let inc=state.Items.filter(({category})=>category===payload.category_name).items.find((itm)=>itm.name===payload.name);
-           inc.quantity-=1;
-           break;
+          return {
+            ...state,
+            data:state.data.map((cat)=>cat.category.name===payload.category_name?Object.assign({},cat,{
+                items:cat.items.map((Pro)=>Pro.name===payload.name?{...Pro,quantity:((Pro.quantity>1)?Pro.quantity-1:1)}:Pro)
+            }):cat)
+          }
         }
         
        case Actiontypes.SET_CART_LOADING:{
