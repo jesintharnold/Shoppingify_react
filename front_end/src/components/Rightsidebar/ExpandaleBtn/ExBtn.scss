@@ -21,35 +21,7 @@
         transition:all 1s ease-out;
         padding:0.2rem;
         border-radius:0.5rem;
-        &:hover{
-            @keyframes left_pcs {
-                from{
-                    transform: translateX(100%);
-                }
-                to{
-                    transform: translateX(0%);
-                    
-                }
-            }
-            @keyframes rgt_pcs {
-                from{
-                    transform:translateX(-100%);
-                }
-                to{
-                    transform: translateX(0%);
-                    
-                }
-            }
-            background-color: white;
-            .lft_pcs{
-                  animation: left_pcs 1s;
-                  display: flex;
-            }
-            .rght_pcs{
-               animation: rgt_pcs 1s;
-               display: block;
-            }
-        }
+      
         button{
             border:none;
             background-color: transparent;
@@ -85,6 +57,37 @@
             color: #F9A10A;
             opacity:1;
             z-index:5;
+        }
+    }
+
+
+    .hover_active{
+        @keyframes left_pcs {
+            from{
+                transform: translateX(100%);
+            }
+            to{
+                transform: translateX(0%);
+                
+            }
+        }
+        @keyframes rgt_pcs {
+            from{
+                transform:translateX(-100%);
+            }
+            to{
+                transform: translateX(0%);
+                
+            }
+        }
+        background-color: white;
+        .lft_pcs{
+              animation: left_pcs 1s;
+              display: flex;
+        }
+        .rght_pcs{
+           animation: rgt_pcs 1s;
+           display: block;
         }
     }
 }

@@ -3,7 +3,7 @@ import {Actiontypes} from './ActionConstant';
 const InitialState={
     Loading:false,
     Error:null,
-    name:"Test-1",
+    name:null,
     data:[
         {
             "category":{
