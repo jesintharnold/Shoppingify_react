@@ -25,7 +25,10 @@ return(
 </div> 
 <div>
 <p>Didn’t find what you need?</p>
-<button onClick={()=>setTab('AddItem')}>Add item</button>
+<button onClick={()=>{
+    setTab('AddItem');
+    setEdit(false);
+}}>Add item</button>
 </div>
 </div>
 <div className="shopping_list_name">
