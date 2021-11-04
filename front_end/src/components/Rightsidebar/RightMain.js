@@ -7,7 +7,8 @@ import Additem from './AddItem/Additem';
 import React, {useState,useRef} from 'react';
 import {connect} from 'react-redux';
 import * as Creator from '../../Redux/ActionCreators';
-// import React from 'react';
+
+
 function Rightmainbar({Increment,Decrement,cartData,cartLoading,cartName,Delete}){
 
     const [tab,setTab]=useState('');
@@ -56,9 +57,9 @@ return(
 
 const mapStatetoProps=(state)=>{
 return{
-    cartData:state.items.data,
-    cartName:state.items.name??"Shopping List",
-    cartLoading:state.items.Loading
+    cartData:state.cartItems.data,
+    cartName:state.cartItems.name??"Shopping List",
+    cartLoading:state.cartItems.Loading
 }
 }
 

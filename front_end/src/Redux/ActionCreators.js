@@ -37,13 +37,38 @@ export const DeleteCartItem=(payload)=>{
 // GETCARTASYNC
 // SAVECARTASYNC
 
-
-
 //-----------MAKE-TOAST----------------
-
 export const MakeToast=(payload)=>{
     return {
         type:Actiontypes.MAKE_TOAST,
         payload:payload
     }
 }
+
+//------------ITEM-ACTION-CREATOR-------
+export const GetItemData=(payload)=>{
+    return {
+        type:Actiontypes.GET_ALL_ITEM,
+        payload:payload
+    }
+}
+
+export const GetItemDetails=(payload)=>{
+    return {
+        type:Actiontypes.GET_ITEM_DETAILS,
+        payload:payload
+    }
+}
+
+export const ItemLoading=()=>{
+    return {
+        type:Actiontypes.SET_ITEM_LOADING
+    }
+}
+
+
+//API GET ALL ITEMS
+// API GET SPECIFIC DETAILS
+
+
+

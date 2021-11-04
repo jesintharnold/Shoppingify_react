@@ -3,20 +3,28 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import reportWebVitals from './reportWebVitals';
 import Navbar from './components/Navbar/Navbar';
-import { BrowserRouter as Router} from "react-router-dom";
+import { BrowserRouter,Route,Switch} from "react-router-dom";
 import Mainitem from './components/Main/MainItems';
 import Rightmainbar from './components/Rightsidebar/RightMain';
-import Additem from './components/Rightsidebar/AddItem/Additem';
 import {Provider} from 'react-redux';
 import store from './Redux/Store';
+import HistoryMain from './components/History/History_Main/History_Main';
+import Analytics from './components/Analytics/Analytics';
+
 
 ReactDOM.render(
   <React.StrictMode>
   <Provider store={store}>
-    <Router>
+    <BrowserRouter>
     <Navbar/> 
-    <Mainitem/>
-    </Router>
+    
+    <Switch>
+    <Route exact path="/" children={<Mainitem/>} />
+    <Route exact path="/history" children={HistoryMain}/>
+    <Route exact path="/analytics" children={Analytics}/>
+    </Switch>
+
+    </BrowserRouter>
     <Rightmainbar/>
   </Provider>
   </React.StrictMode>,

@@ -1,5 +1,6 @@
 .History_main{
     font-family: Quicksand;
+    padding:0 2rem 0 2rem;
     box-sizing: border-box;
 
     .history_month_year{
@@ -23,7 +24,7 @@
         align-items: center;
         justify-content: space-between;
         box-sizing: border-box;
-        padding:1.5rem 2rem;
+        padding:1rem 2rem;
         background-color:rgba(255, 255, 255, 1);
         box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.05);
         border-radius:1rem;
@@ -32,7 +33,7 @@
     
         span:nth-child(1){
             
-            font-size: 1.175rem;
+            font-size: 1rem;
             color: rgba(0, 0, 0, 0.8);
             
         }
@@ -44,11 +45,11 @@
             gap:1rem;
 
             .material-icons{
-                font-size:1.4rem;
+                font-size:1.2rem;
             }
             span:nth-child(2){
                 color:rgba(193, 193, 196, 1);
-                font-size:0.95rem;
+                font-size:0.8rem;
             }
             .status{
                 border:1px solid rgba(86, 204, 242, 1);

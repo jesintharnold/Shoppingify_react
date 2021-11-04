@@ -1,7 +1,7 @@
 import './Additem.scss';
 import {useEffect, useState} from 'react';
 import Optioncontainer from '../Bottombar/Optioncontainer';
-import * as Creator from '../../Redux/ActionCreators';
+import * as Creator from '../../../Redux/ActionConstant';
 import {connect} from 'react-redux';
 
 function Additem({style,set}){
@@ -76,9 +76,9 @@ function Additem({style,set}){
 
 const mapStatetoProps=(state)=>{
     return{
-        cartData:state.items.data,
-        cartName:state.items.name??"Shopping List",
-        cartLoading:state.items.Loading
+        cartData:state.cartItems.data,
+        cartName:state.cartItems.name??"Shopping List",
+        cartLoading:state.cartItems.Loading
     }
     }
     

@@ -7,13 +7,13 @@ import Analytics from '../Analytics/Analytics';
 function Mainitem(){
     return (
         <div className="Main_items">
-        {/* <Header/>
-        <Item/> */}
+        <Header/>
+        <Item/>
 
         {/* <HistoryMain/> */}
         {/* <HistoryExpand/> */}
 
-        <Analytics/>
+        {/* <Analytics/> */}
         </div>
     )
 }

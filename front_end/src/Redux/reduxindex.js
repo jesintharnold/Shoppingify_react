@@ -1,8 +1,10 @@
 import {CartReducer} from './CartReducer';
 import {combineReducers} from 'redux';
+import {ItemReducer} from './ItemReducer';
 
 export const reducers=combineReducers({
-    items:CartReducer
+    cartItems:CartReducer,
+    MainItems:ItemReducer
 });
 
 
