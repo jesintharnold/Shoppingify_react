@@ -4,12 +4,12 @@ import Exbtn from './ExpandaleBtn/ExBtn';
 import Savecontainer from './Bottombar/Savecontainer';
 import Optioncontainer from './Bottombar/Optioncontainer';
 import Additem from './AddItem/Additem';
-import React, {useState,useRef} from 'react';
+import React, {useState} from 'react';
 import {connect} from 'react-redux';
 import * as Creator from '../../Redux/ActionCreators';
 
 
-function Rightmainbar({Increment,Decrement,cartData,cartLoading,cartName,Delete}){
+function Rightmainbar({Increment,Decrement,cartData,cartLoading,cartName,Delete,UpdateName}){
 
     const [tab,setTab]=useState('');
     const [edit,setEdit]=useState(false);
@@ -46,7 +46,7 @@ return(
 </div>
 </div>
 {/* <Optioncontainer save_bt={`Complete`} className={`_complete`}/> */}
-{edit?<Savecontainer val={cartName} savebtEdit={setEdit}/>:''}
+{edit?<Savecontainer val={cartName} savebtEdit={setEdit} save_dispatch={UpdateName}/>:''}
 </div>
 <Additem style={tab==='AddItem'?{right:'0%'}:{right:'-105%'}} set={setTab}/>
 
@@ -67,7 +67,8 @@ const mapDispatchtoProps=dispatch=>{
 return {
     Increment:(data)=>dispatch(Creator.IncCartQty(data)),
     Decrement:(data)=>dispatch(Creator.DecCartQty(data)),
-    Delete:(data)=>dispatch(Creator.DeleteCartItem(data))
+    Delete:(data)=>dispatch(Creator.DeleteCartItem(data)),
+    UpdateName:(data)=>dispatch(Creator.UpdateCartName(data))
 }
 } 
 export default connect(mapStatetoProps,mapDispatchtoProps)(Rightmainbar)

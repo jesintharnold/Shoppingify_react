@@ -23,13 +23,33 @@ const InitialState={
         },
         {
             "category":{
-                "name":"Fruits",
+                "name":"The Commuter",
                 "_Id":"000000000000000002345"
             },
             "items":[
                 {
-                "name":"cod-2",
+                "name":"Plan-A",
                 "_Id":"00000000000000256"
+                },
+                {
+                    "name":"Plan-B",
+                    "_Id":"00000000000000256"
+                },
+                {
+                    "name":"Plan-C",
+                    "_Id":"00000000000000256"
+                },
+                {
+                    "name":"Plan-D",
+                    "_Id":"00000000000000256"
+                },
+                {
+                    "name":"Plan-E",
+                    "_Id":"00000000000000256"
+                },
+                {
+                    "name":"Plan-F",
+                    "_Id":"00000000000000256"
                 }
             ]
         }

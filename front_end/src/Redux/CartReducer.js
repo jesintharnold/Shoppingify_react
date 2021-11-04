@@ -95,6 +95,13 @@ export const CartReducer=(state=InitialState,{type,payload})=>{
             }
           }
        }
+
+       case Actiontypes.UPDATE_CART_NAME:{
+           return {
+               ...state,
+               name:payload
+           }
+       }
         
        default:
             return state;

@@ -34,6 +34,13 @@ export const DeleteCartItem=(payload)=>{
     }
 }
 
+export const UpdateCartName=(payload)=>{
+    return {
+        type:Actiontypes.UPDATE_CART_NAME,
+        payload:payload
+    }
+}
+
 // GETCARTASYNC
 // SAVECARTASYNC
 
