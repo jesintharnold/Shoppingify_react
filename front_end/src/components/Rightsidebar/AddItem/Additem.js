@@ -4,12 +4,13 @@ import Optioncontainer from '../Bottombar/Optioncontainer';
 import * as Creator from '../../../Redux/ActionConstant';
 import {connect} from 'react-redux';
 
-function Additem({style,set}){
+function Additem({style,set,cartData}){
 
     let initial={name:"",note:"",url:"",category:""};
     const [frm,setfrm]=useState(initial);
     const [err,setErr]=useState({});
     const [submit,setSubmit]=useState(false);
+    const [visible,setVisible]=useState(false);
    
     function validate(frm){
        let error={};
@@ -31,10 +32,23 @@ function Additem({style,set}){
        setfrm({...frm,[id]:value});
     }
     useEffect(()=>{
+
+        if(frm.category.trim().split("").length<1){
+            setVisible(false);
+       }
+
        if(Object.keys(err).length===0 && submit){
            console.log("No Errors -- are given");     //dispatch of add item goes here
        }
-    },[err,submit])
+
+       
+
+    },[err,submit,visible,frm.category])
+
+    function setFrmchange(data){
+        setfrm({...frm,category:data});
+        setVisible(true);
+    }
 
     return (
         <div className="Add_item_main"  style={style} >
@@ -58,11 +72,8 @@ function Additem({style,set}){
         <label htmlFor="category">Category</label>
         <input id="category" type="text" placeholder="Enter a category" value={frm.category} onChange={e=>onvalChange(e)}/>
         {err.category?<p>{err.category}</p>:''}
-        <div className="search_recommends">
-         <div>HEllo</div> 
-         <div>HEllo</div>   
-         <div>HEllo</div> 
-         <div>HEllo</div> 
+        <div className="search_recommends" style={visible?{visibility:"hidden"}:{visibility:"visible"}}>
+         {cartData.filter(p=>p.category.name.toLowerCase().includes(frm.category)).map((c)=><div key={c.category.name} onClick={()=>setFrmchange(c.category.name)}>{c.category.name}</div>)} 
         </div>
         </div>
         </form>
