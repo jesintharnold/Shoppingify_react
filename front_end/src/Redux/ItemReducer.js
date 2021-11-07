@@ -4,6 +4,10 @@ const InitialState={
     Loading:false,
     Error:null,
     SelectedData:null,
+    filter:{
+     status:false,
+     data:null
+    },
     data:[
         {
             "category":{
@@ -63,7 +67,11 @@ export const ItemReducer=(state=InitialState,{type,payload})=>{
            ...state,
            data:payload.Items,
            Loading:false,
-           SelectedData:null
+           SelectedData:null,
+           filter:{
+            status:false,
+            data:null
+           }
            }
        }
 
@@ -79,6 +87,29 @@ export const ItemReducer=(state=InitialState,{type,payload})=>{
            return {
                ...state,
                Loading:true
+           }
+       }
+
+       case Actiontypes.GET_FILTER_DATA:{
+           return {
+               ...state,
+               filter:{
+                   status:true,
+                   data:state.data.map(cat=>Object.assign({},cat,{
+                       items:cat.items.filter(o=>o.name.toLowerCase().includes(payload.toLowerCase()))
+                   }))
+               }
+           }
+       }
+
+
+       case Actiontypes.SET_NO_FILTER:{
+           return {
+               ...state,
+               filter:{
+                status:false,
+                data:null
+               }
            }
        }
 

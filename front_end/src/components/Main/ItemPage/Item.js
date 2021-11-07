@@ -1,9 +1,25 @@
 import './Item.scss';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {connect} from 'react-redux';
 import * as Creator from '../../../Redux/ActionCreators';
 
-function Item({ItemData,AddToCart}){
+function Item({ItemData,AddToCart,filter,NoFilter,SetFilter}){
+
+  const [search,searchVal]=useState('');
+
+
+  
+useEffect(()=>{
+
+  if(search.trim().split(/\s+/).length>=1){
+    SetFilter(search);
+   }else{
+     NoFilter();
+   }
+
+},[search])
+  
+
 return (
     <React.Fragment>
     <div className="header">
@@ -12,13 +28,13 @@ return (
          </div>
          <div className="search">
              <span className="material-icons">search</span>
-             <input type="text" placeholder="Search item"/> 
+             <input type="text" placeholder="Search item" value={search} onChange={e=>{searchVal(e.target.value);console.log(e.target.value);}}/> 
         </div>
     </div>
 
     <div className="Item">
 
-    {ItemData.map(
+    {(filter.status?filter.data:ItemData).map(
     ({category,items},index)=>(
         <>
         <div className="Item_name">{category.name}</div> 
@@ -49,13 +65,16 @@ return (
 
 const mapStatetoProps=(state)=>{
     return{
-        ItemData:state.MainItems.data
+        ItemData:state.MainItems.data,
+        filter:state.MainItems.filter
     }
     }
     
     const mapDispatchtoProps=dispatch=>{
     return {
-       AddToCart:(data)=>dispatch(Creator.AddItemToCart(data))
+       AddToCart:(data)=>dispatch(Creator.AddItemToCart(data)),
+       SetFilter:(data)=>dispatch(Creator.setFiltering(data)),
+       NoFilter:()=>dispatch(Creator.noFilter)
     }
     } 
     export default connect(mapStatetoProps,mapDispatchtoProps)(Item)

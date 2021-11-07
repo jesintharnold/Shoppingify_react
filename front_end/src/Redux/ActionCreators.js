@@ -83,6 +83,19 @@ export const ItemLoading=()=>{
 }
 
 
+export const setFiltering=(payload)=>{
+    return {
+        type:Actiontypes.GET_FILTER_DATA,
+        payload:payload
+    }
+}
+
+export const noFilter=()=>{
+    return {
+        type:Actiontypes.SET_NO_FILTER
+    }
+}
+
 //API GET ALL ITEMS
 // API GET SPECIFIC DETAILS
 
