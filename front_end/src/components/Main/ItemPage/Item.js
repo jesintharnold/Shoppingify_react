@@ -1,9 +1,9 @@
 import './Item.scss';
 import React from 'react';
 import {connect} from 'react-redux';
-import * as Creator from '../../../Redux/ActionConstant';
+import * as Creator from '../../../Redux/ActionCreators';
 
-function Item({ItemData}){
+function Item({ItemData,AddToCart}){
 return (
     <React.Fragment>
     <div className="header">
@@ -25,7 +25,13 @@ return (
         <div className="Item_list">
         {items.map((Itm,index_)=>(
           <>
-            <button className="Item_btn">
+            <button className="Item_btn" onClick={()=>AddToCart({
+              name:Itm.name,
+              category_ID:"0000000035678",
+              category_name:category.name,
+              quantity:1,
+              Item_Id:"0000000002589"
+            })}>
             <span>{Itm.name}</span>
             <span class="material-icons">add</span>
             </button>
@@ -49,7 +55,7 @@ const mapStatetoProps=(state)=>{
     
     const mapDispatchtoProps=dispatch=>{
     return {
-       
+       AddToCart:(data)=>dispatch(Creator.AddItemToCart(data))
     }
     } 
     export default connect(mapStatetoProps,mapDispatchtoProps)(Item)

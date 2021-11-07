@@ -41,6 +41,15 @@ export const UpdateCartName=(payload)=>{
     }
 }
 
+export const AddItemToCart=(payload)=>{
+    return {
+        type:Actiontypes.ADD_ITEM_TO_CART,
+        payload:payload
+    }
+}
+
+
+
 // GETCARTASYNC
 // SAVECARTASYNC
 

@@ -16,10 +16,13 @@ function Rightmainbar({Increment,Decrement,cartData,cartLoading,cartName,Delete,
     
 return(
 
-<div className='_main_bar'>       
+<div className='_main_bar'> 
+
+
 <div className="RightMain" >
 
 <div className="width_90">
+
 <div className="bottle_left">
 <div>
 <img src={bottle} width="100%"  alt="Not found"/>
@@ -32,18 +35,22 @@ return(
 }}>Add item</button>
 </div>
 </div>
+
 <div className="shopping_list_name">
     <p>{cartName}</p>
     <button onClick={()=>setEdit(true)} style={edit?{display:'none'}:{display:'block'}}>
     <span className="material-icons">edit</span>
     </button>
 </div>
+
 <div className="category">
 {cartData.map(
     ({category,items},index)=>(
         <Exbtn Inc={Increment} Dec={Decrement} cat_name={category.name} Del={Delete} items={items} key={`cat-${index}`} edit={edit} />
     ))}
 </div>
+
+
 </div>
 {/* <Optioncontainer save_bt={`Complete`} className={`_complete`}/> */}
 {edit?<Savecontainer val={cartName} savebtEdit={setEdit} save_dispatch={UpdateName}/>:''}
