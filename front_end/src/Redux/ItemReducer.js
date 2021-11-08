@@ -3,7 +3,15 @@ import {Actiontypes} from './ActionConstant';
 const InitialState={
     Loading:false,
     Error:null,
-    SelectedData:null,
+    SelectedItem:{
+        status:false,
+        data:{
+            imageURL:null,
+            name:null,
+            category:null,
+            note:null
+        }
+    },
     filter:{
      status:false,
      data:null
@@ -112,6 +120,31 @@ export const ItemReducer=(state=InitialState,{type,payload})=>{
                }
            }
        }
+
+       case Actiontypes.SET_SELECTED_ITEM:{
+           return {
+               ...state,
+               SelectedItem:{
+                status:true,
+                data:payload
+            }
+           }
+       }
+
+       case Actiontypes.NO_SELECTED_ITEM:{
+        return {
+            ...state,
+            SelectedItem:{
+             status:false,
+             data:{
+                imageURL:null,
+                name:null,
+                category:null,
+                note:null
+            }
+         }
+        }
+    }
 
        default:
            return state;

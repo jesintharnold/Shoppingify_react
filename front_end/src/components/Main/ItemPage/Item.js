@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import {connect} from 'react-redux';
 import * as Creator from '../../../Redux/ActionCreators';
 
-function Item({ItemData,AddToCart,filter,NoFilter,SetFilter}){
+function Item({ItemData,AddToCart,filter,NoFilter,SetFilter,SelectItem}){
 
   const [search,searchVal]=useState('');
 
@@ -40,9 +40,13 @@ return (
         <div className="Item_name">{category.name}</div> 
         <div className="Item_list">
         {items.map((Itm,index_)=>(
-          
             <div className='itm_btn' key={`Itm-${index}`}>
-            <span className="Itm_nam">{Itm.name}</span>
+            <span className="Itm_nam" onClick={()=>SelectItem({
+                imageURL:null,
+                name:Itm.name,
+                category:category.name,
+                note:null
+            })}>{Itm.name}</span>
             <button className="Item_btn" onClick={()=>AddToCart({
               name:Itm.name,
               category_ID:"0000000035678",
@@ -76,7 +80,8 @@ const mapStatetoProps=(state)=>{
     return {
        AddToCart:(data)=>dispatch(Creator.AddItemToCart(data)),
        SetFilter:(data)=>dispatch(Creator.setFiltering(data)),
-       NoFilter:()=>dispatch(Creator.noFilter)
+       NoFilter:()=>dispatch(Creator.noFilter),
+       SelectItem:(data)=>dispatch(Creator.selectedItem(data))
     }
     } 
     export default connect(mapStatetoProps,mapDispatchtoProps)(Item)

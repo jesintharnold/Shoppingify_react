@@ -1,0 +1,73 @@
+.overview{
+    background-color:white;
+    font-family:Quicksand;
+    font-weight:normal;
+    line-height:1.8rem;
+    position:absolute;
+    width:100%;
+    height:100%;
+    top:0;
+    bottom:0;
+    color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    z-index:15;
+    overflow-y: auto;
+
+
+    .width_form_9{
+        margin-top:1rem;
+        width:85%;
+        height: 100%;
+        line-height:1.5rem;
+
+        .bkp_btn{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap:0.5rem;
+            color:#F9A109;
+            border:none;
+            background-color: transparent;
+            outline:none;
+            span{
+                font-size:1rem;
+            }
+        }
+
+        .Img_container{
+            overflow: hidden;
+            width:100%;
+            min-height:10rem;
+            display: flex;
+            justify-content: center;
+            margin-top:1rem;
+            margin-bottom:1.5rem;
+
+            img{
+                object-fit:cover;
+                width:100%;
+                border-radius:25px;
+                background-repeat: no-repeat;
+            }
+        }
+
+        
+        label{
+            font-size:0.9rem;
+            margin-bottom:0.1rem;
+            color: rgb(133, 133, 133);
+        }
+        p{
+            font-size:1rem;
+            margin-bottom:0.5rem;
+        }
+
+        .note_area{
+            font-size:1rem;
+            line-height:1.4rem;
+            overflow-y: auto;
+        }
+    }
+}

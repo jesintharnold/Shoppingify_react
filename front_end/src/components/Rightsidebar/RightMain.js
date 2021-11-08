@@ -7,6 +7,7 @@ import Additem from './AddItem/Additem';
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
 import * as Creator from '../../Redux/ActionCreators';
+import Overview from './Overview/overview';
 
 
 function Rightmainbar({Increment,Decrement,cartData,cartLoading,cartName,Delete,UpdateName}){
@@ -56,7 +57,7 @@ return(
 {edit?<Savecontainer val={cartName} savebtEdit={setEdit} save_dispatch={UpdateName}/>:''}
 </div>
 <Additem style={tab==='AddItem'?{right:'0%'}:{right:'-105%'}} set={setTab}/>
-
+<Overview/>
 </div>
 );
 }

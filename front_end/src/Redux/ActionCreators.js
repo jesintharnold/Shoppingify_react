@@ -96,6 +96,19 @@ export const noFilter=()=>{
     }
 }
 
+export const selectedItem=(payload)=>{
+return {
+    type:Actiontypes.SET_SELECTED_ITEM,
+    payload:payload
+  }
+}
+
+export const select_no_item=()=>{
+    return {
+        type:Actiontypes.NO_SELECTED_ITEM,
+    }
+}
+
 //API GET ALL ITEMS
 // API GET SPECIFIC DETAILS
 
