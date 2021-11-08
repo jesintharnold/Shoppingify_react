@@ -41,8 +41,6 @@ function Additem({style,set,cartData}){
            console.log("No Errors -- are given");     //dispatch of add item goes here
        }
 
-       
-
     },[err,submit,visible,frm.category])
 
     function setFrmchange(data){

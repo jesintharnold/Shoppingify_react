@@ -2,8 +2,9 @@ import './Navbar.scss';
 import Heart from '../../Assests/heart.svg';
 import {NavLink,Link} from "react-router-dom";
 import NavData from "./Navbar_data.json";
+import {connect} from "react-redux";
 
-function Navbar() {
+function Navbar({cartData}) {
 
     return (
       <div className="navbar">
@@ -23,10 +24,18 @@ function Navbar() {
        </ul>
        <div className="cart">
        <span className="material-icons-outlined">shopping_cart</span>
-       <span className="cart_count">5</span>  
+       <span className="cart_count">{cartData}</span>  
        </div>
       </div>
     );
   }
 
-export default Navbar;  
+  const mapStatetoProps=(state)=>{
+    let count=0;
+    state.cartItems.data.map((a)=>count+=a.items.length);
+    return{
+        cartData:count
+    }
+  }
+    
+export default connect(mapStatetoProps)(Navbar);  
