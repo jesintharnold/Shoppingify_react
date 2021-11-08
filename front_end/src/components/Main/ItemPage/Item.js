@@ -36,11 +36,13 @@ return (
 
     {(filter.status?filter.data:ItemData).map(
     ({category,items},index)=>(
-        <>
+        <React.Fragment key={`Itm-cat-${index}`}>
         <div className="Item_name">{category.name}</div> 
         <div className="Item_list">
         {items.map((Itm,index_)=>(
-          <>
+          
+            <div className='itm_btn' key={`Itm-${index}`}>
+            <span className="Itm_nam">{Itm.name}</span>
             <button className="Item_btn" onClick={()=>AddToCart({
               name:Itm.name,
               category_ID:"0000000035678",
@@ -48,13 +50,13 @@ return (
               quantity:1,
               Item_Id:"0000000002589"
             })}>
-            <span>{Itm.name}</span>
-            <span class="material-icons">add</span>
+            <span className="material-icons">add</span>
             </button>
-          </>
+            </div>
+          
         ))}  
       </div>
-      </>
+      </React.Fragment>
         
     ))}
 
