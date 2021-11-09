@@ -25,11 +25,13 @@ return (
 
 
 <div className="History_items">
-    
+
 {
 HistoryData[his_con].data[cat_con].cat_item.map(
     ({category,items},index)=>
+
     <>
+
     <div className="container_name" key={`con-cat-his-${index}`}>{category.name}</div>
     
     <div className="his_itm">
@@ -40,7 +42,9 @@ HistoryData[his_con].data[cat_con].cat_item.map(
         </div>
         )}
     </div>
+    
     </>
+
     )
      
 }
