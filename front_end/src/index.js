@@ -10,6 +10,7 @@ import {Provider} from 'react-redux';
 import store from './Redux/Store';
 import HistoryMain from './components/History/History_Main/History_Main';
 import Analytics from './components/Analytics/Analytics';
+import HistoryExpand from './components/History/History_Expand/HistoryExpand';
 
 
 ReactDOM.render(
@@ -20,8 +21,10 @@ ReactDOM.render(
     
     <Switch>
     <Route exact path="/" children={<Mainitem/>} />
-    <Route exact path="/history" children={HistoryMain}/>
-    <Route exact path="/analytics" children={Analytics}/>
+    <Route exact path="/history" children={<HistoryMain/>}/>
+    <Route exact path="/history/:history_id" children={<HistoryExpand/>}/>
+    <Route exact path="/analytics" children={<Analytics/>}/>
+
     </Switch>
 
     </BrowserRouter>

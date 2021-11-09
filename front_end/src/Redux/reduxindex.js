@@ -1,10 +1,12 @@
 import {CartReducer} from './CartReducer';
 import {combineReducers} from 'redux';
 import {ItemReducer} from './ItemReducer';
+import {HistoryReducer} from "./HistoryReducer";
 
 export const reducers=combineReducers({
     cartItems:CartReducer,
-    MainItems:ItemReducer
+    MainItems:ItemReducer,
+    HistoryItems:HistoryReducer
 });
 
 

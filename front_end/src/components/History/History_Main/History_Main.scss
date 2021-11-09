@@ -51,18 +51,27 @@
                 color:rgba(193, 193, 196, 1);
                 font-size:0.8rem;
             }
-            .status{
-                border:1px solid rgba(86, 204, 242, 1);
-                padding:0.2rem;
-                font-size:0.8rem;
-                border-radius:0.5rem;
-                color:rgba(86, 204, 242, 1);
-             
-            }
+            
             .navigate{
                 color:#F9A109;
                 font-size:1.5rem;
             }
         }
     }
+}
+
+
+.status-comp{
+    border:1px solid rgba(86, 204, 242, 1);
+    padding:0.2rem;
+    font-size:0.8rem;
+    border-radius:0.5rem;
+    color:rgba(86, 204, 242, 1);
+}
+.status-danger{
+    border:1px solid rgba(235, 87, 87, 1);
+    padding:0.2rem;
+    font-size:0.8rem;
+    border-radius:0.5rem;
+    color:rgba(235, 87, 87, 1);
 }

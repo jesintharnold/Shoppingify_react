@@ -4,12 +4,16 @@
     padding:0 2rem 0 2rem;
 
     a{
+
+        .material-icons{
+            font-size:1.1rem;
+        }
         display: flex;
         align-items: center;
         gap:0.5rem;
         margin:0 0 1.5rem 0;
         color:#F9A109;
-        font-size:1.3rem;
+        font-size:1.2rem;
     }
 
     .List_name{

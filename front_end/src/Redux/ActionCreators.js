@@ -114,3 +114,22 @@ export const select_no_item=()=>{
 
 
 
+//-----------------------------------------------------------------------
+
+
+export const GetHistoryData=(payload)=>{
+    return {
+        type:Actiontypes.GET_HISTORY_ALL,
+        payload:payload
+    }
+}
+
+export const SetHistoryLoading=()=>{
+  return {
+      type:Actiontypes.SET_HISTORY_LOADING
+  }
+}
+
+
+
+
