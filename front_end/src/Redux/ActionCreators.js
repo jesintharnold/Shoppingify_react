@@ -34,6 +34,14 @@ export const DeleteCartItem=(payload)=>{
     }
 }
 
+export const ChangeCheckedState=(payload)=>{
+    return {
+        type:Actiontypes.CHANGE_CHECKED_STATE,
+        payload:payload
+    }
+}
+
+
 export const UpdateCartName=(payload)=>{
     return {
         type:Actiontypes.UPDATE_CART_NAME,

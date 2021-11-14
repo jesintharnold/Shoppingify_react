@@ -9,7 +9,7 @@ import {connect} from 'react-redux';
 import * as Creator from '../../Redux/ActionCreators';
 import Overview from './Overview/overview';
 
-function Rightmainbar({Increment,Decrement,cartData,cartLoading,cartName,Delete,UpdateName,selectState}){
+function Rightmainbar({Increment,Decrement,cartData,cartLoading,cartName,Delete,UpdateName,selectState,CheckedState}){
     const [tab,setTab]=useState('');
     const [edit,setEdit]=useState(false);    
 return(
@@ -39,7 +39,7 @@ return(
 <div className="category">
 {cartData.map(
     ({category,items},index)=>(
-        <Exbtn Inc={Increment} Dec={Decrement} cat_name={category.name} Del={Delete} items={items} key={`cat-${index}`} edit={edit} />
+        <Exbtn Inc={Increment} Dec={Decrement} cat_name={category.name} Del={Delete} items={items} key={`cat-${index}`} edit={edit} dipatch={CheckedState} />
     ))}
 </div>
 
@@ -67,7 +67,8 @@ return {
     Increment:(data)=>dispatch(Creator.IncCartQty(data)),
     Decrement:(data)=>dispatch(Creator.DecCartQty(data)),
     Delete:(data)=>dispatch(Creator.DeleteCartItem(data)),
-    UpdateName:(data)=>dispatch(Creator.UpdateCartName(data))
+    UpdateName:(data)=>dispatch(Creator.UpdateCartName(data)),
+    CheckedState:(data)=>dispatch(Creator.ChangeCheckedState(data))
 }
 } 
 export default connect(mapStatetoProps,mapDispatchtoProps)(Rightmainbar)

@@ -15,7 +15,7 @@ const InitialState={
                 "name":"Avocodo",
                 "quantity":3,
                 "_Id":"0000000000000026",
-                "checked":false
+                "checked":true
                 },
                 {
                     "name":"cod",
@@ -153,6 +153,16 @@ export const CartReducer=(state=InitialState,{type,payload})=>{
                     }
 
        }
+
+        case Actiontypes.CHANGE_CHECKED_STATE:{
+            return {
+                ...state,
+                data:state.data.map((cat)=>cat.category.name===payload.category_name?Object.assign({},cat,{
+                    items:cat.items.map((Pro)=>Pro.name===payload.name?{...Pro,checked:payload.checkedState}:Pro)
+                }):cat)
+             }
+            }
+        
         
        default:
             return state;
