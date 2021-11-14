@@ -19,7 +19,7 @@ function Exbtn({Inc,Dec,cat_name,items,Del,edit}){
         <div className='check_box_bar'>
         {!edit?<>
             <input type="checkbox" className="input_checkbox" id={`${cat_name+Itm.name}`} />  
-        <label for={`${cat_name+Itm.name}`}>
+        <label htmlFor={`${cat_name+Itm.name}`}>
         <span className='box'></span> 
         </label>
         </>:""}

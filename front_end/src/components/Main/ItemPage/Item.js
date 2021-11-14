@@ -40,7 +40,7 @@ return (
         <div className="Item_name">{category.name}</div> 
         <div className="Item_list">
         {items.map((Itm,index_)=>(
-            <div className='itm_btn' key={`Itm-${index}`}>
+            <div className='itm_btn' key={`Itm-${index_}`}>
             <span className="Itm_nam" onClick={()=>SelectItem({
                 imageURL:null,
                 name:Itm.name,

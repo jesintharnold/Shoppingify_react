@@ -8,7 +8,7 @@ function Overview({selectItm,no_select,AddToCart,selectState}){
 <div className="width_form_9">
 
 <button className='bkp_btn' onClick={()=>no_select()}>
-<span class="material-icons">keyboard_backspace</span>
+<span className="material-icons">keyboard_backspace</span>
 <span>back</span>
 </button>   
 <div className='Img_container'>

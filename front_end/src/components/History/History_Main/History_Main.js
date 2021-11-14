@@ -23,10 +23,10 @@ return (
         <Link className="history_container" key={`H-${index}`} to={`/history/${i}${index}`} >
              <span>{Name}</span>
              <div className="date_data">
-             <span class="material-icons">calendar_today</span>
+             <span className="material-icons">calendar_today</span>
              <span>{DateOfCreation}</span>
              <div className={Status==="completed"?`status-comp`:`status-danger`}>{Status}</div>
-             <span class="material-icons navigate">navigate_next</span>
+             <span className="material-icons navigate">navigate_next</span>
             </div>
         </Link>
         
