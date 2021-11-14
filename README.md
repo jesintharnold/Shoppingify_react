@@ -1,6 +1,6 @@
 # TODO's
 
 <ol>
-<li>Check List - Cancel - complete</li>
+<li>API DESIGN</li>
 <li>Chart's & ProgressBar</li>
 </ol>
