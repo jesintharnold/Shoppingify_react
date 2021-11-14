@@ -44,7 +44,7 @@ return(
 </div>
 
 </div>
-{(!selectState&&!edit)?<Optioncontainer save_bt={`Complete`} className={`_complete`}/>:''}
+{(!selectState&&!edit&&tab==='')?<Optioncontainer save_bt={`Complete`} className={`_complete`}/>:''}
 {(edit&&!selectState)?<Savecontainer val={cartName} savebtEdit={setEdit} save_dispatch={UpdateName}/>:''}
 </div>
 <Additem style={tab==='AddItem'?{right:'0%'}:{right:'-105%'}} set={setTab}/>
