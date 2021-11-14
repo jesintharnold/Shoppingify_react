@@ -21,18 +21,20 @@ const InitialState={
                           category:{
                             name:"Fruits and vegetables",
                             _Id:"000000000000000002345"
-                                   },
+                                },
 
                           items:[
                                {
                                   name:"Avocodo",
                                   quantity:3,
-                                  _Id:"00000000000000256"
+                                  _Id:"00000000000000256",
+                                  "checked":false
                                },
                                {
                                    name:"cod",
                                    quantity:3,
-                                   _Id:"00000000000000256"
+                                   _Id:"00000000000000256",
+                                   "checked":false
                                 }
                                 
                                 ]

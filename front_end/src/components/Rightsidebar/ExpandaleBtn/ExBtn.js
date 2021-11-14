@@ -15,7 +15,17 @@ function Exbtn({Inc,Dec,cat_name,items,Del,edit}){
          {items.map((Itm,index_)=>(
          
         <div className="category_item" key={`cat-Item-${index_}`} >
+            
+        <div className='check_box_bar'>
+        {!edit?<>
+            <input type="checkbox" className="input_checkbox" id={`${cat_name+Itm.name}`} />  
+        <label for={`${cat_name+Itm.name}`}>
+        <span className='box'></span> 
+        </label>
+        </>:""}
         <p>{Itm.name}</p>
+        </div>
+
         <div className={edit?`pcs hover_active`:'pcs'} >
         <div className="lft_pcs">    
         <button className="delete" onClick={()=>Del({category_name:cat_name,name:Itm.name})}><span className="material-icons">delete_outline</span></button>

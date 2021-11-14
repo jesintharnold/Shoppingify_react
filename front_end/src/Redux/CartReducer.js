@@ -14,30 +14,34 @@ const InitialState={
                 {
                 "name":"Avocodo",
                 "quantity":3,
-                "_Id":"00000000000000256"
+                "_Id":"0000000000000026",
+                "checked":false
                 },
                 {
                     "name":"cod",
                     "quantity":3,
-                    "_Id":"00000000000000256"
+                    "_Id":"0000000000000056",
+                    "checked":false
                 }
             ]
         },
         {
             "category":{
                 "name":"Fruits",
-                "_Id":"000000000000000002345"
+                "_Id":"000000000000000002"
             },
             "items":[
                 {
                 "name":"cod",
                 "quantity":3,
-                "_Id":"00000000000000256"
+                "_Id":"00000000000000006",
+                "checked":false
                 }
             ]
         }
     ]
 };
+
 
 export const CartReducer=(state=InitialState,{type,payload})=>{
     switch(type){
@@ -154,3 +158,5 @@ export const CartReducer=(state=InitialState,{type,payload})=>{
             return state;
     }
 };
+
+
