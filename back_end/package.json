@@ -23,5 +23,10 @@
   "bugs": {
     "url": "https://github.com/jesintharnold/Shoppingify_react/issues"
   },
-  "homepage": "https://github.com/jesintharnold/Shoppingify_react/tree/master#readme"
+  "homepage": "https://github.com/jesintharnold/Shoppingify_react/tree/master#readme",
+  "dependencies": {
+    "config": "^3.3.6",
+    "express": "^4.17.1",
+    "joi": "^17.4.2"
+  }
 }

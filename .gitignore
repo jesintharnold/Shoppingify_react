@@ -5,6 +5,11 @@
 /front_end/.pnp
 /front_end/.pnp.js
 
+/back_end/node_modules
+/back_end/.pnp
+/back_end/.pnp.js
+/back_end/config/*
+
 # testing
 /coverage
 
