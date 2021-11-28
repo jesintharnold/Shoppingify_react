@@ -2,9 +2,10 @@
   "name": "shoppify_backend",
   "version": "1.0.0",
   "description": "A Backend Application for Shoppify task",
-  "main": "app.js",
+  "main": "src/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "set NODE_ENV=development&&node src/app.js"
   },
   "repository": {
     "type": "git",
