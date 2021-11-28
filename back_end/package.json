@@ -1,0 +1,26 @@
+{
+  "name": "shoppify_backend",
+  "version": "1.0.0",
+  "description": "A Backend Application for Shoppify task",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jesintharnold/Shoppingify_react.git#master"
+  },
+  "keywords": [
+    "nodejs",
+    "backend",
+    "jwt",
+    "auth0",
+    "validate"
+  ],
+  "author": "Jesinth Arnold",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jesintharnold/Shoppingify_react/issues"
+  },
+  "homepage": "https://github.com/jesintharnold/Shoppingify_react/tree/master#readme"
+}
