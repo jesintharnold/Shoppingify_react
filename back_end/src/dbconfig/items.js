@@ -27,7 +27,7 @@ class ItemDAO{
     static async updateItem(cat_name,User_ID,Itm_name,note,imageURL){
         try{
             let dup_res=await item_collection.find({"User_ID" :ObjectId(User_ID),name:cat_name,'Items.name':{'$eq':Itm_name}}).toArray().length;
-            logger.info(dup_res);
+            // logger.info(dup_res);
 
 
             let add_upsert_item=await item_collection.findOneAndUpdate(
@@ -37,7 +37,7 @@ class ItemDAO{
                     },
                     {upsert:(typeof dup_res===undefined)?true:false}
                     );
-                    logger.info(add_upsert_item);
+                    // logger.info(add_upsert_item);
             return add_upsert_item;
         }
         catch(e){
