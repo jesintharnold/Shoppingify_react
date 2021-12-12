@@ -17,11 +17,15 @@ const deleteItemSchema=Joi.object().keys({
     userID:Joi.string().trim().max(24).required()
 });
 
+const historyCartSchema=Joi.object().keys({
+    userID:Joi.string().trim().max(24).required()
+});
 
 
 
 module.exports={
     getAllItemSchema,
     addItemSchema,
-    deleteItemSchema
+    deleteItemSchema,
+    historyCartSchema
 }

@@ -1,4 +1,4 @@
-const {logger}=require("../../utils/logger");
+const {logger}=require("../utils/logger");
 const {ObjectId}=require("mongodb");
 let item_collection;
 class ItemDAO{

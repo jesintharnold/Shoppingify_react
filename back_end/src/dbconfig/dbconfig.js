@@ -1,6 +1,6 @@
 const mongoDB=require("mongodb");
 const config=require("config");
-const {logger}=require("../../utils/logger");
+const {logger}=require("../utils/logger");
 
 let connected=false;
 const DBconnect= async ()=>{
