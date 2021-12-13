@@ -1,12 +1,14 @@
 # TODO's
 
-
 ## Frontend
  - Chart & Analytics section is pending
  - API request to Backend
 
 ## Backend
- - GET Request Cart / Items / History 
- - POST Request ADD ITEM / COMPLETE / CANCEL
- - Schema Validation using JOI
- - MongoDB Data Modelling
+ - Joi Schema Unhandled Error Response
+ - Setting Correct Headers
+ - Logging in S3 bucket file
+ - POST Cart Items (Compare and post payload)
+ - CORS 
+
+ 
