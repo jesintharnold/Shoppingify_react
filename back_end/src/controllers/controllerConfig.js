@@ -36,6 +36,19 @@ const postcartcontroller=async (req,res,next)=>{
 }
 
 
+/** 
+*@swagger
+* components:
+*  schemas:
+*   items:
+*     type: object
+*     required:
+*       - userID
+*     properties:
+*       userID:
+*         type: string
+*         description: provide user-id to fetch all items
+*/
 
 
 const itemcontrollerget=async (req,res,next)=>{
@@ -56,6 +69,22 @@ const itemcontrollerget=async (req,res,next)=>{
 
 }
 
+
+/** 
+*@swagger
+* components:
+*  schemas:
+*   historyitems:
+*     type: object
+*     required:
+*       - userID
+*     properties:
+*       userID:
+*         type: string
+*         description: provide user-id
+*/
+
+
 const historycontroller=async (req,res,next)=>{
    let {error,value}=historyCartSchema.validate(req.body);
    logger.info(req.body);
@@ -70,6 +99,36 @@ const historycontroller=async (req,res,next)=>{
 
 // POST controllers
 
+
+/** 
+*@swagger
+* components:
+*  schemas:
+*   additems:
+*     type: object
+*     required:
+*       - userID
+*       - name
+*       - category
+*     properties:
+*       userID:
+*         type: string
+*         description: Provide userID
+*       name:
+*         type: string
+*         description: Provide ItemName
+*       note:
+*         type: string
+*         description: Provide Note
+*       category:
+*         type: string
+*         description: Provide category Name
+*       imageURL:
+*         type: string
+*         description: Provide category ImageURL
+*/
+
+
 const additemcontroller=async (req,res,next)=>{
     let {error,value}=addItemSchema.validate(req.body);
     logger.info(req.body);
@@ -80,6 +139,30 @@ const additemcontroller=async (req,res,next)=>{
      res.status(500).json({Err:`Internal Server Error`});
     }
 }
+
+
+
+/** 
+*@swagger
+* components:
+*  schemas:
+*   deleteitem:
+*     type: object
+*     required:
+*       - userID
+*       - categoryID
+*       - itemID
+*     properties:
+*       userID:
+*         type: string
+*         description: Provide userID
+*       categoryID:
+*         type: string
+*         description: Provide categoryID
+*       itemID:
+*         type: string
+*         description: Provide itemID
+*/
 
 const deleteitemcontroller=async (req,res,next)=>{
     let {error,value}=deleteItemSchema.validate(req.body);
