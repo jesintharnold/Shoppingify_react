@@ -8,6 +8,7 @@ class ItemDAO{
        }
        try{
            item_collection=await db.collection("items");
+           logger.info("Items collection connected");
        }
        catch(e){
             logger.error(`Error while connecting to item collection \n ${e}`);
@@ -16,32 +17,47 @@ class ItemDAO{
 
     static async allitems(User_ID){
         try{
-
+            // logger.warn(item_collection.find({"User_ID" :ObjectId(User_ID)}).toArray());
             return await item_collection.find({"User_ID" :ObjectId(User_ID)}).toArray();
         }
         catch(e){
             logger.error(`Unable to fetch All items - ${e}`);
+            return 500;
         }
     }
 
-    static async updateItem(cat_name,User_ID,Itm_name,note,imageURL){
+    static async updateItem(cat_name,User_ID,Itm_name,note,imageURL,cat_ID){
+
         try{
-            let dup_res=await item_collection.find({"User_ID" :ObjectId(User_ID),name:cat_name,'Items.name':{'$eq':Itm_name}}).toArray().length;
-            // logger.info(dup_res);
 
-
+            if(cat_ID){
+                logger.info(`Executing This block ..`);
+            let dup_res=await item_collection.find({"User_ID" :ObjectId(User_ID),"_id":ObjectId(cat_ID),'Items.name':{'$eq':Itm_name}}).toArray().length;
+            logger.error(typeof dup_res);
             let add_upsert_item=await item_collection.findOneAndUpdate(
                     {"User_ID" :ObjectId(User_ID),name:cat_name,'Items.name':{'$ne':Itm_name}},
                     {
                     $addToSet:{Items:{name:Itm_name,Itm_id:new ObjectId(),note:note,imageURL:imageURL}}
                     },
-                    {upsert:(typeof dup_res===undefined)?true:false}
-                    );
-                    // logger.info(add_upsert_item);
+                    {upsert:false}
+                    );   
             return add_upsert_item;
+
+            }else{
+                let add_upsert_item=await item_collection.findOneAndUpdate(
+                    {"User_ID" :ObjectId(User_ID),name:cat_name,'Items.name':{'$ne':Itm_name}},
+                    {
+                    $addToSet:{Items:{name:Itm_name,Itm_id:new ObjectId(),note:note,imageURL:imageURL}}
+                    },
+                    {upsert:true}
+                    );
+                return add_upsert_item; 
+
+            }
         }
         catch(e){
             logger.error({Err:`Unable to Update item - ${e}`});
+            return 500;
         }
     }
 
@@ -64,6 +80,7 @@ class ItemDAO{
 
         }catch(e){
             logger.error({Err:`Unable to delete item - ${e}`});
+            return 500;
         }
     }
 }

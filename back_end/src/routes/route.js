@@ -5,8 +5,8 @@ const {itemcontrollerget,getcartcontroller,postcartcontroller,historycontroller,
 
 /**
  * @swagger
- * /cart/active:
- *   post:
+ * /cart:
+ *   get:
  *     summary: Get all active cart details
  *     tags:
  *      - Active Cart Details
@@ -23,13 +23,28 @@ const {itemcontrollerget,getcartcontroller,postcartcontroller,historycontroller,
  *         description: Internal Server Error
 */
 
-//GET - CART/ITEMS/HISTORY
+/**
+ * @swagger
+ * /cart:
+ *   post:
+ *     summary: Change or Insert new Active Cart
+ *     tags:
+ *      - Change Active Cart Details
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/postcart'
+ *     responses:
+ *       202:
+ *         description: Active Cart Modified Successfully
+ *       500:
+ *         description: Internal Server Error
+*/
 
-route.post("/cart/active",getcartcontroller);
-
-
+route.get("/cart",getcartcontroller);
 route.post("/cart",postcartcontroller);
-
 
 
 /**
@@ -92,9 +107,11 @@ route.post("/cart",postcartcontroller);
  *       500:
  *         description: Internal Server Error
 */
+
 route.get("/items",itemcontrollerget);
 route.post("/items",additemcontroller);
 route.delete("/items",deleteitemcontroller);
+
 
 
 /**
@@ -117,7 +134,7 @@ route.delete("/items",deleteitemcontroller);
  *         description: Internal Server Error
 */
 
-route.post("/history",historycontroller);
+route.get("/history",historycontroller);
 
 
 

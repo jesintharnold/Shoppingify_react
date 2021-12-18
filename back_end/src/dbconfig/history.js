@@ -1,5 +1,6 @@
 const {logger}=require("../utils/logger");
 const {ObjectId}=require("mongodb");
+const { valid, object } = require("joi");
 let history_collection;
 
 class HistoryDAO{
@@ -76,6 +77,7 @@ class HistoryDAO{
 
       }catch(e){
         logger.error(`Unable to Cart History items - ${e}`);
+        return 500;
       }
     }
 
@@ -139,8 +141,51 @@ class HistoryDAO{
   
         }catch(e){
           logger.error(`Unable to Cart Active Cart items - ${e}`);
+          return 500;
         }
       }
+
+    static async postActiveCart(cartID,userID,listName,items,status){
+    
+      let _items=items.map(dat=>Object.assign({},dat,{category_ID:ObjectId(dat.category_ID),Item_ID:ObjectId(dat.Item_ID)}));
+
+      try{
+        await history_collection.updateMany({"User_ID":ObjectId(userID)},{$set:{Active_list:false}});
+      
+      if(cartID){
+         
+         logger.warn(`ObjectID changing started \n`);
+         
+         let _res=await history_collection.updateOne(
+           {"User_ID":ObjectId(userID),"_id":ObjectId(cartID)},
+           {
+             $set:{
+              ListName:listName,
+              Active_list:true,
+              status:status,
+              items:_items
+             }
+           }
+          
+          );
+          return _res;
+      }else{
+         let _res=await history_collection.insertOne({
+          listName :listName,
+          status : status,
+          User_ID :ObjectId(userID),
+          items : _items,
+          Active_list:true
+         });
+         _res.modifiedCount=0;
+         return _res;
+      }
+
+      }catch(e){
+        logger.error(`Db Error - ${e}`);
+        return 500;
+      }
+    }  
 }
 
 

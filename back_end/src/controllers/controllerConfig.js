@@ -1,8 +1,8 @@
 const ItemDAO=require("../dbconfig/items");
 const HistoryDAO=require("../dbconfig/history");
-const {getAllItemSchema,addItemSchema,deleteItemSchema,historyCartSchema}=require("../../schema_validators/ItemSchems");
-const Joi=require('joi');
+const {getAllItemSchema,addItemSchema,deleteItemSchema,historyCartSchema,postCartSchema}=require("../../schema_validators/ItemSchems");
 const {logger}=require('../utils/logger');
+const {ObjectId}=require("mongodb");
 
 /** 
 *@swagger
@@ -21,17 +21,67 @@ const {logger}=require('../utils/logger');
 
 const getcartcontroller=async (req,res,next)=>{
     let {error,value}=historyCartSchema.validate(req.body);
-    logger.info(req.body);
      if(value.userID!==undefined){
          let response=await HistoryDAO.getActiveCart(value.userID);
-         res.status(200).json(response);        
+         if(response===500){
+            res.status(500).json({Err:`Internal Server Error`});
+        }
+         res.status(200).json({cart:response});        
      }else{
-      res.status(500).json({Err:`Internal Server Error`});
+      res.status(500).json({Err:`Validation - data missing`});
      }
 }
 
+/** 
+*@swagger
+* components:
+*  schemas:
+*   postcart:
+*     type: object
+*     required:
+*       - userID
+*       - listName
+*       - status
+*       - status
+*     properties:
+*       userID:
+*         type: string
+*         description: Provide userID
+*       listName:
+*         type: string
+*         description: Provide list name
+*       status:
+*         type: string
+*         description: Provide Status (completed | In-progress | Cancelled) 
+*       cartID:
+*         type: string
+*         description: Provide category cartID
+*/
 
 const postcartcontroller=async (req,res,next)=>{
+    let {value,error}=postCartSchema.validate(req.body);
+
+    if(value.userID!==undefined&&value.items!==undefined){
+        
+        
+        let _res=await HistoryDAO.postActiveCart(value.cartID,value.userID,value.listName,value.items,value.status);
+        
+        if(_res===500){
+            res.status(500).json({Err:`Internal Server Error`});
+        }
+        
+        if(_res.modifiedCount===1){
+            res.status(202).json({status:`Success`});
+        }else if(_res.insertedId!==null){
+            res.status(202).json({status:`Success`,cartID:_res.insertedId});
+        }
+        else{
+            res.status(400).json({status:`Failed`});
+        }
+    }else{
+        res.status(500).json({Err:`Validation - data missing`});
+    }
+
 
 }
 
@@ -54,17 +104,17 @@ const postcartcontroller=async (req,res,next)=>{
 const itemcontrollerget=async (req,res,next)=>{
 
     let {error,value}=getAllItemSchema.validate(req.body);
-    logger.info(req.body);
-    logger.info(`Joi - Validation ${value.userID}`);
-
-
-    if(value!==undefined){
-      let data=await ItemDAO.allitems();
+ 
+    if(value.userID!==undefined){  
+      let data=await ItemDAO.allitems(value.userID);
+      if(data===500){
+        res.status(500).json({Err:`Internal Server Error`});
+      };
       res.status(200).json({
-          Items:data
+         Item:data
       })
     }else{
-        res.status(500).json({Err:`Internal Server Error`});
+        res.status(500).json({Err:`Validation - data missing`});
     }
 
 }
@@ -87,12 +137,14 @@ const itemcontrollerget=async (req,res,next)=>{
 
 const historycontroller=async (req,res,next)=>{
    let {error,value}=historyCartSchema.validate(req.body);
-   logger.info(req.body);
     if(value.userID!==undefined){
         let response=await HistoryDAO.getCartHistory(value.userID);
-        res.status(200).json(response);        
+        if(response===500){
+            res.status(500).json({Err:`Internal Server Error`});
+          }
+        res.status(200).json({Cart:response});        
     }else{
-     res.status(500).json({Err:`Internal Server Error`});
+     res.status(500).json({Err:`Validation - data missing`});
     }
 }
 
@@ -110,6 +162,7 @@ const historycontroller=async (req,res,next)=>{
 *       - userID
 *       - name
 *       - category
+*       - categoryID
 *     properties:
 *       userID:
 *         type: string
@@ -126,17 +179,22 @@ const historycontroller=async (req,res,next)=>{
 *       imageURL:
 *         type: string
 *         description: Provide category ImageURL
+*       categoryID:
+*         type: string
+*         description: Provide category CategoryID if exist
 */
 
 
 const additemcontroller=async (req,res,next)=>{
     let {error,value}=addItemSchema.validate(req.body);
-    logger.info(req.body);
     if(value.name!==undefined&&value.category!==undefined){
-        let response=await ItemDAO.updateItem(value.category,value.userID,value.name,value.note,value.imageURL);
+        let response=await ItemDAO.updateItem(value.category,value.userID,value.name,value.note,value.imageURL,value.categoryID);
+        if(response===500){
+            res.status(500).json({Err:`Internal Server Error`});
+        }
         res.status(201).json(response);        
     }else{
-     res.status(500).json({Err:`Internal Server Error`});
+     res.status(500).json({Err:`Validation - data missing`});
     }
 }
 
@@ -166,12 +224,15 @@ const additemcontroller=async (req,res,next)=>{
 
 const deleteitemcontroller=async (req,res,next)=>{
     let {error,value}=deleteItemSchema.validate(req.body);
-    logger.info(req.body);
     if(value.categoryID&&value.userID&&value.itemID){
         let  del_res=await ItemDAO.deleteItem(value.userID,value.categoryID,value.itemID);
+        if(del_res===500){
+            res.status(500).json({Err:`Internal Server Error`});
+          };
         if(del_res){
-            res.status(200).json({Request_status:`Successful`});
-        }
+            logger.info(del_res);
+            res.status(200).json({Request_status:`Success`});
+        };
     }else{
         res.status(500).json({Err:`Internal Server Error`});
     }
