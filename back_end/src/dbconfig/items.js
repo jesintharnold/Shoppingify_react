@@ -17,7 +17,6 @@ class ItemDAO{
 
     static async allitems(User_ID){
         try{
-            // logger.warn(item_collection.find({"User_ID" :ObjectId(User_ID)}).toArray());
             return await item_collection.find({"User_ID" :ObjectId(User_ID)}).toArray();
         }
         catch(e){
@@ -31,7 +30,6 @@ class ItemDAO{
         try{
 
             if(cat_ID){
-                logger.info(`Executing This block ..`);
             let dup_res=await item_collection.find({"User_ID" :ObjectId(User_ID),"_id":ObjectId(cat_ID),'Items.name':{'$eq':Itm_name}}).toArray().length;
             logger.error(typeof dup_res);
             let add_upsert_item=await item_collection.findOneAndUpdate(
@@ -52,7 +50,6 @@ class ItemDAO{
                     {upsert:true}
                     );
                 return add_upsert_item; 
-
             }
         }
         catch(e){

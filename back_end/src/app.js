@@ -14,7 +14,11 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(route);
 app.use("/shoppifydocs",swaggerUi.serve,swaggerUi.setup(swaggeroptions));
+app.use((req, res) => {
+    res.status(404).send('404 not found')
+  });
 
+  
 DBconnect().then(async (db)=> {
     await ItemDAO.injectCol(db);
     await HistoryDAO.injectCol(db);

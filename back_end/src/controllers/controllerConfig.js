@@ -21,6 +21,9 @@ const {ObjectId}=require("mongodb");
 
 const getcartcontroller=async (req,res,next)=>{
     let {error,value}=historyCartSchema.validate(req.body);
+    if(error){
+        res.status(500).json({Err:`Internal Server Error`});
+    };
      if(value.userID!==undefined){
          let response=await HistoryDAO.getActiveCart(value.userID);
          if(response===500){
@@ -43,6 +46,7 @@ const getcartcontroller=async (req,res,next)=>{
 *       - listName
 *       - status
 *       - status
+*       - items
 *     properties:
 *       userID:
 *         type: string
@@ -56,11 +60,16 @@ const getcartcontroller=async (req,res,next)=>{
 *       cartID:
 *         type: string
 *         description: Provide category cartID
+*       items:
+*         type: object
+*         description: Please provide Items
 */
 
 const postcartcontroller=async (req,res,next)=>{
     let {value,error}=postCartSchema.validate(req.body);
-
+    if(error){
+        res.status(500).json({Err:`Internal Server Error`});
+    };
     if(value.userID!==undefined&&value.items!==undefined){
         
         
@@ -104,7 +113,10 @@ const postcartcontroller=async (req,res,next)=>{
 const itemcontrollerget=async (req,res,next)=>{
 
     let {error,value}=getAllItemSchema.validate(req.body);
- 
+    if(error){
+        
+        res.status(500).json({Err:`Internal Server Error`});
+    };
     if(value.userID!==undefined){  
       let data=await ItemDAO.allitems(value.userID);
       if(data===500){
@@ -137,6 +149,9 @@ const itemcontrollerget=async (req,res,next)=>{
 
 const historycontroller=async (req,res,next)=>{
    let {error,value}=historyCartSchema.validate(req.body);
+   if(error){
+    res.status(500).json({Err:`Internal Server Error`});
+};
     if(value.userID!==undefined){
         let response=await HistoryDAO.getCartHistory(value.userID);
         if(response===500){
@@ -187,6 +202,10 @@ const historycontroller=async (req,res,next)=>{
 
 const additemcontroller=async (req,res,next)=>{
     let {error,value}=addItemSchema.validate(req.body);
+    if(error){
+        res.status(500).json({Err:`Internal Server Error`});
+    };
+
     if(value.name!==undefined&&value.category!==undefined){
         let response=await ItemDAO.updateItem(value.category,value.userID,value.name,value.note,value.imageURL,value.categoryID);
         if(response===500){
@@ -224,6 +243,11 @@ const additemcontroller=async (req,res,next)=>{
 
 const deleteitemcontroller=async (req,res,next)=>{
     let {error,value}=deleteItemSchema.validate(req.body);
+
+    if(error){
+        res.status(500).json({Err:`Internal Server Error`});
+    };
+
     if(value.categoryID&&value.userID&&value.itemID){
         let  del_res=await ItemDAO.deleteItem(value.userID,value.categoryID,value.itemID);
         if(del_res===500){
