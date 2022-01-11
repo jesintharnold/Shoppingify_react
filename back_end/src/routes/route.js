@@ -1,6 +1,7 @@
 const config=require("config");
 const route=require("express").Router();
 const {itemcontrollerget,getcartcontroller,postcartcontroller,historycontroller,additemcontroller,deleteitemcontroller}=require("../controllers/controllerConfig");
+const {googleoauth}=require('../controllers/googleOauthController');
 
 
 /**
@@ -137,7 +138,9 @@ route.delete("/items",deleteitemcontroller);
 route.get("/history",historycontroller);
 
 
+//Google Oauth handlers
 
+route.get("/api/sessions/oauth/google",googleoauth);
 
 
 
