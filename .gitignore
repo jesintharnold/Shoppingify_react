@@ -9,6 +9,7 @@
 /back_end/.pnp
 /back_end/.pnp.js
 /back_end/config/*
+/back_end/key
 
 # testing
 /coverage
