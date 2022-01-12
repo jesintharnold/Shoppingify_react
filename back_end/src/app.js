@@ -8,6 +8,7 @@ const {DBclose,DBconnect}=require("./dbconfig/dbconfig");
 const bodyParser = require('body-parser');
 const ItemDAO=require("./dbconfig/items");
 const HistoryDAO=require("./dbconfig/history");
+const UserDAO=require("./dbconfig/user");
 const app=express();
 
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -22,6 +23,7 @@ app.use((req, res) => {
 DBconnect().then(async (db)=> {
     await ItemDAO.injectCol(db);
     await HistoryDAO.injectCol(db);
+    await UserDAO.injectCol(db);
 } ).catch(console.log);
 
 

@@ -47,7 +47,7 @@ class ItemDAO{
                     {
                     $addToSet:{Items:{name:Itm_name,Itm_id:new ObjectId(),note:note,imageURL:imageURL}}
                     },
-                    {upsert:true}
+                    {upsert:true,new:true}
                     );
                 return add_upsert_item; 
             }

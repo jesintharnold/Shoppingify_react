@@ -39,29 +39,31 @@ const googleoauth=async (req,res,next)=>{
             if(res_.email_verified){
                   
                 let user_find=await UserDAO.finduser(res_.email,{name:res_.name,email:res_.email});
-                let access_token=Token.access({});
-
-                if(user_find){  // user find upsert is true , means get the payload 
+                let access_token=Token.access({name:res_.name,email:res_.email});
+                if(user_find.value===null){  
                     
-                   
-                    let refresh_token=Token.access({});      // Provide Crt Payload 
-
+                    let refresh_token=Token.access({name:res_.name,email:res_.email});      
                     let updateRefreshToken=await UserDAO.updateRefreshToken(res_.email,refresh_token);
+                    logger.info(updateRefreshToken);
+
+                    // share the Access token to the ID and access-token
+
+
 
                 }else{
-                    //verify Refresh token is not expired - Logic
-               
-                    if(expired){
-                        let refresh_token=Token.access({});
-                        let updateRefreshToken=await UserDAO.updateRefreshToken(res_.email,refresh_token);
+                    let decoded_val=Token.verify(user_find.value.refresh_token);
+                        if(decoded_val.expired){
+                            let refresh_token=Token.access({name:res_.name,email:res_.email});
+                            let updateRefreshToken=await UserDAO.finduser(res_.email,{refresh_token:refresh_token});
+                        }
 
-                    }else{
-                        //share the Access_token to the user
-                    }
+                        // share the Access token to the ID and access-token
 
                 }
 
             }
+
+
 
             // Check it is verified or not   email_verified
             
@@ -73,11 +75,6 @@ const googleoauth=async (req,res,next)=>{
                        // Fine
                  //  else
                        //Create a new Refresh Token and replace in MongoDB                       
-            // Else
-                // Create a New User
-            
-            
-            //Once we get Details Sign JWT and create a session for that User
         });
 
 

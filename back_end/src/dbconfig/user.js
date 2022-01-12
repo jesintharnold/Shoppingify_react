@@ -9,6 +9,11 @@ class UserDAO{
        try{
            user_collection=await db.collection("users");
            logger.info("User collection connected");
+
+
+
+           logger.info(await user_collection.findOneAndUpdate({email:"jesintharnold@gmail.com"},{$set:{name:"jesinth",email:"jesintharnold@gmail.com",refresh_token:null}},{upsert:true}).toArray());
+
        }
        catch(e){
             logger.error(`Error while connecting to User collection \n ${e}`);
@@ -22,7 +27,7 @@ class UserDAO{
                 return await user_collection.findOne({"_id":ObjectId(ID)}).toArray();
             }
             else{
-                return await user_collection.findOneAndUpdate({"email":email},user_payload,{upsert: true,new: true}).toArray();
+                return await user_collection.findOneAndUpdate({"email":email},{$set:user_payload},{upsert: true,new: true}).toArray();
             }
         }
         catch(e){
@@ -31,23 +36,6 @@ class UserDAO{
         }
     
     }
-
-    static async updateRefreshToken(token_payload,email){
-        try{
-            if(ID){
-                return await user_collection.findOneAndUpdate({"email":email},{refreshtoken:token_payload}).toArray();
-            }
-    
-        }
-        catch(e){
-            logger.error(`Unable to update Refresh token - ${e}`);
-            return 500;
-        }
-    }
-
-
-
-
 }
 
 module.exports=UserDAO;

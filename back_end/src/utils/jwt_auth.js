@@ -14,12 +14,17 @@ class Token{
    static verify(token){
        try{
          const decode=jwt.verify(token,public_key);
-         return decode;
+         return {
+          expired:false,
+          decode
+
+         };
        }
        catch(e){
           logger.warn(e);
           return {
-             decode:null
+             decode:null,
+             expired:e.message==="jwt expired"
           }
        }
    }
