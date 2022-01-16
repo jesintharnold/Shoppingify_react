@@ -1,0 +1,79 @@
+.App {
+  background-color:#f6f6f6;
+  position: absolute;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width:100%;
+  height:100%;
+  z-index:1000;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+
+  .App__center{
+
+    min-width:18rem;
+    border:2px solid #f9a109;
+    box-shadow: 0 4px 12px rgba(37,37,37,0.1);
+    background: #f6f6f6;
+    margin: 30vh auto auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius:1.2rem;
+    
+
+    h5{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap:1rem;
+      font-size:1.8rem;
+      font-weight:400;
+      margin:1.2rem 1rem;
+    }
+
+    .google-btn{
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        font-size: 1rem;
+        letter-spacing: 0.2px;
+        margin:1rem 1rem 1.2rem 1rem;
+        cursor:pointer;
+        border:2px solid #f9a109;
+        background-color:#f9a109;
+        border-radius:0.5rem;
+        overflow: hidden;
+
+        .google-icon-wrapper{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          box-sizing: border-box;
+          padding:0.3rem;
+          background-color: white;
+          img{
+            width:1.8rem;
+            height: 1.8rem;
+          }
+        }
+
+
+        .btn-text{
+          font-size:1.05rem;
+          padding:0rem 0.5rem;
+          color:white;
+          font-weight:450;
+        }
+        
+        &:hover{
+          box-shadow: 0 0 3px #f9a109;
+        }
+    }
+
+  }
+}
+
