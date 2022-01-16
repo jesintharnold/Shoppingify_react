@@ -2,7 +2,7 @@ const config=require("config");
 const route=require("express").Router();
 const {itemcontrollerget,getcartcontroller,postcartcontroller,historycontroller,additemcontroller,deleteitemcontroller}=require("../controllers/controllerConfig");
 const {googleoauth}=require('../controllers/googleOauthController');
-
+const checkauth=require('../middleware/protected-routes');
 
 /**
  * @swagger
@@ -44,8 +44,8 @@ const {googleoauth}=require('../controllers/googleOauthController');
  *         description: Internal Server Error
 */
 
-route.get("/cart",getcartcontroller);
-route.post("/cart",postcartcontroller);
+route.get("/cart",checkauth,getcartcontroller);
+route.post("/cart",checkauth,postcartcontroller);
 
 
 /**
@@ -109,9 +109,9 @@ route.post("/cart",postcartcontroller);
  *         description: Internal Server Error
 */
 
-route.get("/items",itemcontrollerget);
-route.post("/items",additemcontroller);
-route.delete("/items",deleteitemcontroller);
+route.get("/items",checkauth,itemcontrollerget);
+route.post("/items",checkauth,additemcontroller);
+route.delete("/items",checkauth,deleteitemcontroller);
 
 
 
@@ -135,7 +135,7 @@ route.delete("/items",deleteitemcontroller);
  *         description: Internal Server Error
 */
 
-route.get("/history",historycontroller);
+route.get("/history",checkauth,historycontroller);
 
 
 //Google Oauth handlers

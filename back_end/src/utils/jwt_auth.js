@@ -9,6 +9,7 @@ const public_key=readFileSync(resolve("key","public.key"),{encoding:'utf8', flag
 // TokenCreate .access .verfiy
 class Token{
    static access(payload) {
+      logger.warn('Sign - - Method')
       return jwt.sign(payload,private_key,config.get('Salt.access'));
    }
    static verify(token){
@@ -17,7 +18,6 @@ class Token{
          return {
           expired:false,
           decode
-
          };
        }
        catch(e){
@@ -30,7 +30,6 @@ class Token{
    }
 
 }
-
 
 module.exports=Token;
 

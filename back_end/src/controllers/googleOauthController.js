@@ -48,7 +48,7 @@ const googleoauth=async (req,res,next)=>{
                     req.user={
                           email:res_.email,
                           ID:updateRefreshToken.value._id
-                    }
+                    };
                 }else{
                     let decoded_val=Token.verify(user_find.value.refresh_token);
                         if(decoded_val.expired){

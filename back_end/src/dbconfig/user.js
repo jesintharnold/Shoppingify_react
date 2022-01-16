@@ -9,11 +9,6 @@ class UserDAO{
        try{
            user_collection=await db.collection("users");
            logger.info("User collection connected");
-
-
-
-           logger.info(await user_collection.findOneAndUpdate({email:"jesintharnold@gmail.com"},{$set:{name:"jesinth",email:"jesintharnold@gmail.com",refresh_token:null}},{upsert:true}).toArray());
-
        }
        catch(e){
             logger.error(`Error while connecting to User collection \n ${e}`);
@@ -35,6 +30,17 @@ class UserDAO{
             return 500;
         }
     
+    }
+
+
+    static async findprotectuser(email){
+        try{
+            return await user_collection.findOne({"email":email}).toArray();
+        }
+        catch(e){
+            logger.error(`Unable to find the User - ${e}`);
+            return 500;
+        }
     }
 }
 
