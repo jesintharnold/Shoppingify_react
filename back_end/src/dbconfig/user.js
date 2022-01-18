@@ -15,14 +15,16 @@ class UserDAO{
        }
     }
 
-    static async finduser(email,ID,user_payload){
+    static async finduser({email,ID,user_payload}){
 
         try{
             if(ID){
                 return await user_collection.findOne({"_id":ObjectId(ID)}).toArray();
             }
             else{
-                return await user_collection.findOneAndUpdate({"email":email},{$set:user_payload},{upsert: true,new: true}).toArray();
+                let r= await user_collection.findOneAndUpdate({"email":email},{$set:user_payload},{upsert:true});
+                logger.info(r);
+                return r;
             }
         }
         catch(e){
