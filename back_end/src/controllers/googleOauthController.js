@@ -7,7 +7,7 @@ const Token=require("../utils/jwt_auth");
 const { request } = require("http");
 
 const googleoauth=async (req,res,next)=>{
-    const google_token_url="https://oauth2.googleapis.com/token";
+    
     let google_code=req.query.code;
     const values={
         code:google_code,
@@ -22,7 +22,7 @@ const googleoauth=async (req,res,next)=>{
     // logger.error(google_code);
     // logger.warn(`------------------`);
     try{
-        const _res=await axios.post("https://oauth2.googleapis.com/token",new URLSearchParams(values).toString(),
+        const _res=await axios.post(config.get('AuthURL.GoogleOauth'),new URLSearchParams(values).toString(),
         {
             headers:{
                 "Content-Type": "application/x-www-form-urlencoded"
@@ -30,16 +30,12 @@ const googleoauth=async (req,res,next)=>{
         }
         ).then(async (x)=>{
           
-            let google_access_token_url=  `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${x.data.access_token}`;
+            let google_access_token_url= `${config.get('AuthURL.GoogleUserInfo')}${x.data.access_token}`;
             const res_=await axios.get(google_access_token_url,{
                 headers: { 
                     Authorization: `Bearer ${x.data.id_token}`
                   }
             });
-
-            logger.error(`Google Access / ID tokens`);
-            logger.info(res_);
-
 
             let {email,name,verified_email}=res_.data;
 
@@ -51,12 +47,13 @@ const googleoauth=async (req,res,next)=>{
                 let user_find=await UserDAO.finduser({email,user_payload:{"name":name,"email":email}});
                 let access_token=Token.access({name:name,email:email});
 
-                logger.error(user_find.value);
-                logger.info(access_token);
+               logger.error(user_find.value);
+               logger.info(access_token);
 
                 if(user_find.value===null){ 
-                    let refresh_token=Token.access({name:name,email:email});      
-                    let updateRefreshToken=await UserDAO.finduser({email,user_payload:{
+                    let refresh_token=Token.access({name:name,email:email});   
+
+                    let updateRefreshToken=await UserDAO.finduser({email:email,user_payload:{
                         "refresh_token":refresh_token
                     }});
                     logger.info(updateRefreshToken);
@@ -66,23 +63,26 @@ const googleoauth=async (req,res,next)=>{
                           email:email,
                           ID:updateRefreshToken.value._id
                     };
-                    res.status(200).send({msg:`Login success`});
+                    res.redirect(config.get("clientOrgin"));
+                    //res.status(200).send({Msg:"Google"});
                 }else{
                     let decoded_val=Token.verify(user_find.value.refresh_token);
-                    //logger.warn(decoded_val);
-                    let updateRefreshToken;
-                        if(decoded_val.expired){
+                    logger.warn(decoded_val);
+                    
+                    if(decoded_val.expired){
                             let refresh_token=Token.access({name:name,email:email});
-                            updateRefreshToken=await UserDAO.finduser({email,user_payload:{refresh_token:refresh_token}});
+                            let updateRefreshToken=await UserDAO.finduser({email:email,user_payload:{refresh_token:refresh_token}});
                         }
                         // share the Access token to the ID and access-token
-                        logger.info(updateRefreshToken);
-                        res.header("x-access-token",access_token);
-                        req.user={
+
+                    
+                    res.header("x-access-token",access_token);
+                    req.user={
                           email:email,
-                          ID:updateRefreshToken.value._id
+                          ID:user_find.value._id
                         }
-                        res.status(200).send({msg:`Login success`});
+                    // res.status(200).send({Msg:"Google"});
+                    res.redirect(config.get("clientOrgin"));
                 }
             };
 
@@ -100,6 +100,8 @@ const googleoauth=async (req,res,next)=>{
         });
     }catch(e){
             logger.warn(e);
+
+            res.redirect()
     }
 
 
