@@ -100,8 +100,7 @@ const googleoauth=async (req,res,next)=>{
         });
     }catch(e){
             logger.warn(e);
-
-            res.redirect()
+            res.redirect(`${config.get("clientOrgin")}/login`);
     }
 
 
