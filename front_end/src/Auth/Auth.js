@@ -31,7 +31,7 @@ function Auth() {
       Shoppingify
     </h5>
 
-  <a className="google-btn" rel="noreferrer" onClick={()=>console.log(`Hello this is Big Bang theory`)} href={googleOauth()}>
+  <a className="google-btn" rel="noreferrer" href={googleOauth()}>
   <div className="google-icon-wrapper">
     <img className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt='Not Found'/>
   </div>

@@ -4,7 +4,7 @@ const { URLSearchParams } = require("url");
 const {logger}=require("../utils/logger");
 const UserDAO=require("../dbconfig/user");
 const Token=require("../utils/jwt_auth");
-const { request } = require("http");
+
 
 const googleoauth=async (req,res,next)=>{
     
@@ -16,11 +16,7 @@ const googleoauth=async (req,res,next)=>{
         redirect_uri:config.get('Google.redirect_URL'),
         grant_type:"authorization_code",
     };
-    // logger.warn(`------------------`);
-    // logger.error(values);
-    // logger.warn(`------------------`);
-    // logger.error(google_code);
-    // logger.warn(`------------------`);
+   
     try{
         const _res=await axios.post(config.get('AuthURL.GoogleOauth'),new URLSearchParams(values).toString(),
         {
@@ -47,45 +43,36 @@ const googleoauth=async (req,res,next)=>{
                 let user_find=await UserDAO.finduser({email,user_payload:{"name":name,"email":email}});
                 let access_token=Token.access({name:name,email:email});
 
-               logger.error(user_find.value);
-               logger.info(access_token);
-
                 if(user_find.value===null){ 
                     let refresh_token=Token.access({name:name,email:email});   
 
                     let updateRefreshToken=await UserDAO.finduser({email:email,user_payload:{
                         "refresh_token":refresh_token
                     }});
-                    logger.info(updateRefreshToken);
-                    //share the Access token to the ID and access-token
-                    res.header("x-access-token",access_token);
+
                     req.user={
                           email:email,
                           ID:updateRefreshToken.value._id
                     };
-                    res.redirect(config.get("clientOrgin"));
-                    //res.status(200).send({Msg:"Google"});
+
+                    res.redirect(`${config.get("clientOrgin")}/login/auth/${access_token}`);
+
                 }else{
                     let decoded_val=Token.verify(user_find.value.refresh_token);
-                    logger.warn(decoded_val);
                     
                     if(decoded_val.expired){
                             let refresh_token=Token.access({name:name,email:email});
                             let updateRefreshToken=await UserDAO.finduser({email:email,user_payload:{refresh_token:refresh_token}});
                         }
-                        // share the Access token to the ID and access-token
-
-                    
-                    res.header("x-access-token",access_token);
+                       
                     req.user={
                           email:email,
                           ID:user_find.value._id
                         }
-                    // res.status(200).send({Msg:"Google"});
-                    res.redirect(config.get("clientOrgin"));
+                    res.redirect(`${config.get("clientOrgin")}/login/auth/${access_token}`);
+                    
                 }
             };
-
             
             // Check it is verified or not   email_verified
             // Check if the user exist in MongoDB
@@ -95,12 +82,9 @@ const googleoauth=async (req,res,next)=>{
             //            Fine
             //       else
             //            Create a new Refresh Token and replace in MongoDB  
-            
-            
         });
     }catch(e){
-            logger.warn(e);
-            res.redirect(`${config.get("clientOrgin")}/login`);
+            res.redirect(`${config.get("clientOrgin")}/login}`);
     }
 
 

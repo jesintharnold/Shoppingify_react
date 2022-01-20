@@ -12,6 +12,7 @@ import HistoryMain from './components/History/History_Main/History_Main';
 import Analytics from './components/Analytics/Analytics';
 import HistoryExpand from './components/History/History_Expand/HistoryExpand';
 import Auth from './Auth/Auth';
+import AuthRedirect from './Auth/AuthRedirect';
 
 
 ReactDOM.render(
@@ -20,11 +21,12 @@ ReactDOM.render(
   <BrowserRouter>
     <Navbar/> 
     <Switch>
-    <Route exact path="/login" children={<Auth/>} />
-    <Route exact path="/" children={<Mainitem/>} />
-    <Route exact path="/history" children={<HistoryMain/>}/>
-    <Route exact path="/history/:history_id" children={<HistoryExpand/>}/>
-    <Route exact path="/analytics" children={<Analytics/>}/>
+    <Route exact path="/login" component={Auth} />
+    <Route exact path="/login/auth/:id_token" component={AuthRedirect} />
+    <Route exact path="/" component={Mainitem} />
+    <Route exact path="/history" component={HistoryMain}/>
+    <Route exact path="/history/:history_id" component={HistoryExpand}/>
+    <Route exact path="/analytics" component={Analytics}/>
     </Switch>
     </BrowserRouter>
     <Rightmainbar/>

@@ -1,7 +1,4 @@
 {
- 
-"AuthURL":{
-    
-}    
+ "APIurl":"http://localhost:4000/"  
 
 }
