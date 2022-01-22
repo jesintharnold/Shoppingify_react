@@ -100,16 +100,22 @@
     .cart{
         margin:1.5rem 0;
         position: relative;
-        .material-icons-outlined{
+        isolation: isolate;
+        
+       
+        .cart_{
             font-size:1.5rem;
             background-color: #f9a109;
             color:white;
-            padding:0.5rem;
+            padding:0.4rem;
             border-radius:50%;
+            border:1px solid white;
+            
         }
         .cart_count{
             position: absolute;
-            top:-5px;
+            box-sizing: border-box;
+            top:-10px;
             right:-5px;
             background: rgba(235, 87, 87, 1);
             padding:0;
@@ -119,8 +125,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            border-radius:5px;
+            border-radius:50%;
             color: white;
+            z-index:-1;
+            border:1px solid #f9a109;
         }
 
     }

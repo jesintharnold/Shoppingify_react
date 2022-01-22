@@ -23,7 +23,7 @@ function Navbar({cartData}) {
          }
        </ul>
        <div className="cart">
-       <span className="material-icons-outlined">shopping_cart</span>
+       <span class="material-icons-outlined cart_">logout</span>
        <span className="cart_count">{cartData}</span>  
        </div>
       </div>
