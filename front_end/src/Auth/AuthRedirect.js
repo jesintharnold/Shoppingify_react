@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useReducer } from "react";
 import {useParams,Redirect, Route, useHistory} from "react-router-dom";
 
 export function AuthRedirect(){
@@ -24,4 +24,11 @@ export function LoginProtect({Comp,...rest}){
             return <Comp/>
         }}
     }/>
+}
+
+
+export function Logout(){
+   localStorage.removeItem("access_token");
+   window.location.href="/login";
+    
 }

@@ -3,6 +3,8 @@ import Heart from '../../Assests/heart.svg';
 import {NavLink,Link} from "react-router-dom";
 import NavData from "./Navbar_data.json";
 import {connect} from "react-redux";
+import { Logout } from '../../Auth/AuthRedirect';
+
 
 function Navbar({cartData}) {
 
@@ -22,7 +24,7 @@ function Navbar({cartData}) {
            ))
          }
        </ul>
-       <div className="cart">
+       <div className="cart" onClick={()=>Logout()}>
        <span class="material-icons-outlined cart_">logout</span>
        <span className="cart_count">{cartData}</span>  
        </div>
