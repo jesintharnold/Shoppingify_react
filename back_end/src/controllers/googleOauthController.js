@@ -69,7 +69,7 @@ const googleoauth=async (req,res,next)=>{
                           email:email,
                           ID:user_find.value._id
                         }
-                    res.redirect(`${config.get("clientOrgin")}/login/auth/${access_token}`);
+                    res.redirect(`${config.get("clientOrgin")}/login/auth/${access_token}/${user_find.value._id}`);
                     
                 }
             };

@@ -7,7 +7,7 @@ import { BrowserRouter,Route,Switch} from "react-router-dom";
 import Mainitem from './components/Main/MainItems';
 import Rightmainbar from './components/Rightsidebar/RightMain';
 import {Provider} from 'react-redux';
-import store from './Redux/Store';
+import  {redux_store} from './Redux/Store';
 import HistoryMain from './components/History/History_Main/History_Main';
 import Analytics from './components/Analytics/Analytics';
 import HistoryExpand from './components/History/History_Expand/HistoryExpand';
@@ -19,12 +19,12 @@ import PrivateRoute from './Auth/Protectedroutes';
 
 ReactDOM.render(
   <React.StrictMode>
-  <Provider store={store}>
+  <Provider store={redux_store}>
   <BrowserRouter>
     <Navbar/> 
     <Switch>
     <LoginProtect exact path="/login" Comp={Auth} />
-    <Route exact path="/login/auth/:id_token" component={AuthRedirect} />
+    <Route exact path="/login/auth/:id_token/:id" component={AuthRedirect} />
     <PrivateRoute exact path="/" Comp={Mainitem} />
     <PrivateRoute exact path="/history" Comp={HistoryMain}/>
     <PrivateRoute exact path="/history/:history_id" Comp={HistoryExpand}/>
