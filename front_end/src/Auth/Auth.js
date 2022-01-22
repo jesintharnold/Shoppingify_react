@@ -18,10 +18,17 @@ function googleOauth(){
     ].join(" "),
   };
   const qs = new URLSearchParams(options);
+
+  
+
   return `${_url}?${qs.toString()}`;
 };
 
 function Auth() {
+
+  if(document.getElementById("root")){
+  document.getElementById("root").remove();
+  };
   return ReactDOM.createPortal(
   
  <div className="App">

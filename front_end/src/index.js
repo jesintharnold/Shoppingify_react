@@ -12,7 +12,9 @@ import HistoryMain from './components/History/History_Main/History_Main';
 import Analytics from './components/Analytics/Analytics';
 import HistoryExpand from './components/History/History_Expand/HistoryExpand';
 import Auth from './Auth/Auth';
-import AuthRedirect from './Auth/AuthRedirect';
+import {AuthRedirect,LoginProtect} from './Auth/AuthRedirect';
+import Notfound from './Auth/Notfound';
+import PrivateRoute from './Auth/Protectedroutes';
 
 
 ReactDOM.render(
@@ -21,12 +23,13 @@ ReactDOM.render(
   <BrowserRouter>
     <Navbar/> 
     <Switch>
-    <Route exact path="/login" component={Auth} />
+    <LoginProtect exact path="/login" Comp={Auth} />
     <Route exact path="/login/auth/:id_token" component={AuthRedirect} />
-    <Route exact path="/" component={Mainitem} />
-    <Route exact path="/history" component={HistoryMain}/>
-    <Route exact path="/history/:history_id" component={HistoryExpand}/>
-    <Route exact path="/analytics" component={Analytics}/>
+    <PrivateRoute exact path="/" Comp={Mainitem} />
+    <PrivateRoute exact path="/history" Comp={HistoryMain}/>
+    <PrivateRoute exact path="/history/:history_id" Comp={HistoryExpand}/>
+    <PrivateRoute exact path="/analytics" Comp={Analytics}/>
+    <Route component={Notfound}/>
     </Switch>
     </BrowserRouter>
     <Rightmainbar/>
