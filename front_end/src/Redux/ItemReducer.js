@@ -1,5 +1,8 @@
 import {Actiontypes} from './ActionConstant';
 
+
+//Set content using JSON.parse(JSON.stringify(object));
+
 const InitialState={
     Loading:false,
     Error:null,
@@ -18,50 +21,27 @@ const InitialState={
     },
     data:[
         {
-            "category":{
-                "name":"Fruits and vegetables",
-                "_Id":"000000000000000002345"
-            },
-            "items":[
+            _id: "61ace482ad7a52ad882aa3aa",
+            User_ID: "619a5bd0a01ef280b3b92bd4",
+            name: "Non-veg",
+            Items: [
                 {
-                "name":"Avocodo",
-                "_Id":"00000000000000256"
+                    name: "Chicken Soup",
+                    Itm_id: "61ace482256ebf05f3150904",
+                    note: "A good is required",
+                    imageURL: "www.google.com/jesintharnold"
                 },
                 {
-                    "name":"cod-1",
-                    "_Id":"00000000000000256"
-                }
-            ]
-        },
-        {
-            "category":{
-                "name":"The Commuter",
-                "_Id":"000000000000000002345"
-            },
-            "items":[
-                {
-                "name":"Plan-A",
-                "_Id":"00000000000000256"
+                    name: "ChickenLeg",
+                    Itm_id: "61ace639fb926b664a9f8182",
+                    note: "A good is required",
+                    imageURL: "www.google.com/jesintharnold"
                 },
                 {
-                    "name":"Plan-B",
-                    "_Id":"00000000000000256"
-                },
-                {
-                    "name":"Plan-C",
-                    "_Id":"00000000000000256"
-                },
-                {
-                    "name":"Plan-D",
-                    "_Id":"00000000000000256"
-                },
-                {
-                    "name":"Plan-E",
-                    "_Id":"00000000000000256"
-                },
-                {
-                    "name":"Plan-F",
-                    "_Id":"00000000000000256"
+                    name: "Chicken Burger",
+                    Itm_id: "61d45c0eed886fb975803bd2",
+                    note: "A Chicken Burger grown in our own garden of Eden , served directly to your plater",
+                    imageURL: "www.google.com/jesintharnold"
                 }
             ]
         }
@@ -104,7 +84,7 @@ export const ItemReducer=(state=InitialState,{type,payload})=>{
                filter:{
                    status:true,
                    data:state.data.map(cat=>Object.assign({},cat,{
-                       items:cat.items.filter(o=>o.name.toLowerCase().includes(payload.toLowerCase()))
+                       items:cat.Items.filter(o=>o.name.toLowerCase().includes(payload.toLowerCase()))
                    }))
                }
            }

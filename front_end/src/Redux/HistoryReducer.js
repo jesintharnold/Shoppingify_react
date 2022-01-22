@@ -50,7 +50,6 @@ const InitialState={
 
 export const HistoryReducer=(state=InitialState,{type,payload})=>{
 switch(type){
-
     case Actiontypes.GET_HISTORY_ALL:{
         return {
             ...state,
@@ -58,14 +57,12 @@ switch(type){
             Loading:false
         }
     }
-
     case Actiontypes.SET_HISTORY_LOADING:{
         return {
             ...state,
             Loading:true
         }
     }
-
     default :
        return state;
 }
