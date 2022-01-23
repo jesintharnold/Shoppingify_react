@@ -58,10 +58,10 @@ class HistoryDAO{
         status:{$first:"$status"},
         DOC:{$first:"$DOC"},
         ListName:{$first:"$ListName"},
-        category_ID:{$first:"$items.category_ID"},   
-        categoryname:{$first:"$address.name"},
         items:{
         $push:{
+        category_ID:"$items.category_ID",   
+        categoryname:"$address.name",  
         ItemName:"$address.firstElem.name",
         checked:"$items.checked",
         quantity:"$items.quantity",
