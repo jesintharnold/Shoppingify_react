@@ -1,0 +1,7 @@
+26/01/2022
+- Added POST/GET/DELETE CART/ITEMS/HISTORY
+- Added Dummy values "Deleted" in category name & item name = none
+
+27/01/2022
+- Check Filter section search item
+- Check Middleware auth -- JWT
