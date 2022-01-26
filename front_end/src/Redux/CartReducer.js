@@ -3,7 +3,8 @@ import {Actiontypes} from './ActionConstant';
 const InitialState={
     Loading:false,
     Error:null,
-    name:null,
+    name:"Shopping Cart",
+    CartID:null,
     data:[
         {
             "category":{
@@ -48,9 +49,9 @@ export const CartReducer=(state=InitialState,{type,payload})=>{
        case Actiontypes.GET_CART_ALL:{
            return {
                ...state,
-               data:payload.Items,      //Refer Sample_data.json for schema
+               data:payload.a, 
                Loading:false,
-               name:payload.name
+               CartID:payload.b
            }
        }
 
@@ -128,7 +129,8 @@ export const CartReducer=(state=InitialState,{type,payload})=>{
                                  items:[...cat.items,{
                                     name:payload.name,
                                     quantity:payload.quantity,
-                                    _Id:payload.Item_Id
+                                    _Id:payload.Item_Id,
+                                    checked:payload.checked
                                 }]
                              }):cat)   
                             }
@@ -145,7 +147,8 @@ export const CartReducer=(state=InitialState,{type,payload})=>{
                                     {
                                     name:payload.name,
                                     quantity:payload.quantity,
-                                    _Id:payload.Item_Id
+                                    _Id:payload.Item_Id,
+                                    checked:payload.checked
                                     }
                                 ]
                             }]

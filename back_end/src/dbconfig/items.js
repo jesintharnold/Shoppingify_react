@@ -26,20 +26,29 @@ class ItemDAO{
     }
 
     static async updateItem(cat_name,User_ID,Itm_name,note,imageURL,cat_ID){
-
+       logger.warn({
+        cat_name:cat_name,
+        User_ID:User_ID,
+        Itm_name:Itm_name,
+        note:note,
+        imageURL:imageURL,
+        cat_ID:cat_ID
+       });
         try{
 
             if(cat_ID){
-            let dup_res=await item_collection.find({"User_ID" :ObjectId(User_ID),"_id":ObjectId(cat_ID),'Items.name':{'$eq':Itm_name}}).toArray().length;
-            logger.error(typeof dup_res);
-            let add_upsert_item=await item_collection.findOneAndUpdate(
-                    {"User_ID" :ObjectId(User_ID),name:cat_name,'Items.name':{'$ne':Itm_name}},
-                    {
-                    $addToSet:{Items:{name:Itm_name,Itm_id:new ObjectId(),note:note,imageURL:imageURL}}
-                    },
-                    {upsert:false}
-                    );   
-            return add_upsert_item;
+            // let dup_res=await item_collection.find({"User_ID" :ObjectId(User_ID),"_id":ObjectId(cat_ID),'Items.name':{'$eq':Itm_name}}).toArray().length;
+            // logger.error(dup_res);
+                let add_upsert_item=await item_collection.findOneAndUpdate(
+                        {"User_ID" :ObjectId(User_ID),name:cat_name,'Items.name':{'$ne':Itm_name}},
+                        {
+                        $addToSet:{Items:{name:Itm_name,Itm_id:new ObjectId(),note:note,imageURL:imageURL}}
+                        },
+                        {upsert:false}
+                        );   
+
+                logger.error(add_upsert_item);        
+                return add_upsert_item;
 
             }else{
                 let add_upsert_item=await item_collection.findOneAndUpdate(
@@ -47,8 +56,10 @@ class ItemDAO{
                     {
                     $addToSet:{Items:{name:Itm_name,Itm_id:new ObjectId(),note:note,imageURL:imageURL}}
                     },
-                    {upsert:true,new:true}
+                    {upsert:true}
                     );
+
+                logger.error(add_upsert_item);     
                 return add_upsert_item; 
             }
         }

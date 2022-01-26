@@ -21,15 +21,22 @@ const {ObjectId}=require("mongodb");
 
 
 const getcartcontroller=async (req,res,next)=>{
-    let {error,value}=historyCartSchema.validate(req.body);
+    logger.warn(req.query);
+    let {error,value}=historyCartSchema.validate(req.query);
     if(error){
+        logger.error(error);
         res.status(500).json({Err:`Internal Server Error`});
     };
      if(value.userID!==undefined){
+         logger.error(value.userID);
          let response=await HistoryDAO.getActiveCart(value.userID);
+         logger.warn(response);
          if(response===500){
             res.status(500).json({Err:`Internal Server Error`});
         }
+
+        
+
          res.status(200).json({cart:response});        
      }else{
       res.status(500).json({Err:`Validation - data missing`});
@@ -67,7 +74,12 @@ const getcartcontroller=async (req,res,next)=>{
 */
 
 const postcartcontroller=async (req,res,next)=>{
+
+    logger.error(req.body);
     let {value,error}=postCartSchema.validate(req.body);
+
+    logger.warn(error);
+
     if(error){
         res.status(500).json({Err:`Internal Server Error`});
     };
@@ -112,16 +124,16 @@ const postcartcontroller=async (req,res,next)=>{
 
 
 const itemcontrollerget=async (req,res,next)=>{
-
-    let {error,value}=getAllItemSchema.validate(req.body);
+    logger.warn(req.query);
+    let {error,value}=getAllItemSchema.validate(req.query);
     if(error){
         
-        res.status(500).json({Err:`Internal Server Error`});
+        res.status(500).json({Err:`Internal Server Error--`});
     };
     if(value.userID!==undefined){  
       let data=await ItemDAO.allitems(value.userID);
       if(data===500){
-        res.status(500).json({Err:`Internal Server Error`});
+        res.status(500).json({Err:`Internal Server Error*****`});
       };
       res.status(200).json({
          Item:data
@@ -149,7 +161,8 @@ const itemcontrollerget=async (req,res,next)=>{
 
 
 const historycontroller=async (req,res,next)=>{
-   let {error,value}=historyCartSchema.validate(req.body);
+   logger.warn(req.query);
+   let {error,value}=historyCartSchema.validate(req.query);
    if(error){
     res.status(500).json({Err:`Internal Server Error`});
 };
@@ -202,17 +215,21 @@ const historycontroller=async (req,res,next)=>{
 
 
 const additemcontroller=async (req,res,next)=>{
+    console.log(req.body);
     let {error,value}=addItemSchema.validate(req.body);
     if(error){
-        res.status(500).json({Err:`Internal Server Error`});
+        logger.warn(error);
+        res.status(500).json({Err:`Internal Server Errors`});
     };
-
     if(value.name!==undefined&&value.category!==undefined){
         let response=await ItemDAO.updateItem(value.category,value.userID,value.name,value.note,value.imageURL,value.categoryID);
+        logger.warn(response);
+
         if(response===500){
-            res.status(500).json({Err:`Internal Server Error`});
+            res.status(500).json({Err:`Internal Server Error------------`});
         }
-        res.status(201).json(response);        
+        res.status(201).json(response);     
+
     }else{
      res.status(500).json({Err:`Validation - data missing`});
     }
@@ -251,6 +268,7 @@ const deleteitemcontroller=async (req,res,next)=>{
 
     if(value.categoryID&&value.userID&&value.itemID){
         let  del_res=await ItemDAO.deleteItem(value.userID,value.categoryID,value.itemID);
+        logger.info(del_res);
         if(del_res===500){
             res.status(500).json({Err:`Internal Server Error`});
           };

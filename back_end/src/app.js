@@ -9,15 +9,23 @@ const bodyParser = require('body-parser');
 const ItemDAO=require("./dbconfig/items");
 const HistoryDAO=require("./dbconfig/history");
 const UserDAO=require("./dbconfig/user");
+const Headers =require("./middleware/Headers");
+const cors = require('cors')
+
+
 const app=express();
 
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
+app.use(cors()) 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(route);
 app.use("/shoppifydocs",swaggerUi.serve,swaggerUi.setup(swaggeroptions));
 app.use((req, res) => {
     res.status(404).send('404 not found')
   });
+
+
+  
 
   
 DBconnect().then(async (db)=> {

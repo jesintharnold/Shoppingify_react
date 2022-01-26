@@ -42,17 +42,20 @@ return (
         {Items.map((Itm,index_)=>(
             <div className='itm_btn' key={`Itm-${index_}`}>
             <span className="Itm_nam" onClick={()=>SelectItem({
-                imageURL:null,
+                imageURL:Itm.imageURL,
                 name:Itm.name,
                 category:name,
-                note:null
+                note:Itm.note,
+                itemID:Itm.Itm_id,
+                categoryID:_id
             })}>{Itm.name}</span>
             <button className="Item_btn" onClick={()=>AddToCart({
               name:Itm.name,
               category_ID:`${_id}`,
               category_name:name,
               quantity:1,
-              Item_Id:"0000000002589"
+              Item_Id:`${Itm.Itm_id}`,
+              checked:false
             })}>
             <span className="material-icons">add</span>
             </button>

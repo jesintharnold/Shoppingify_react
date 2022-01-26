@@ -2,7 +2,7 @@ import './overview.scss';
 import {connect} from 'react-redux';
 import * as Creator from '../../../Redux/ActionCreators';
 import Optioncontainer from '../Bottombar/Optioncontainer';
-function Overview({selectItm,no_select,AddToCart,selectState}){
+function Overview({selectItm,no_select,AddToCart,selectState,DeleteItem}){
     return(
 <div className='overview' style={selectState?{right:"0%"}:{right:"-100%"}}> 
 <div className="width_form_9">
@@ -12,14 +12,14 @@ function Overview({selectItm,no_select,AddToCart,selectState}){
 <span>back</span>
 </button>   
 <div className='Img_container'>
-<img src={selectItm.imageURL??"https://www.w3schools.com/css/lights600x400.jpg"} alt='none'/>
+<img src={selectItm.imageURL===""?"https://www.w3schools.com/css/lights600x400.jpg":(selectItm.imageURL??"https://www.w3schools.com/css/lights600x400.jpg")} alt='none'/>
 </div>
 <label>name</label>
 <p>{selectItm.name??"Aurora Lights"}</p>
 <label>category</label>
-<p>{selectItm.category??"Life"}</p>
+<p>{selectItm.category??undefined}</p>
 <label>note</label>
-<div className='note_area'>{selectItm.note??"The lights, which are also called aurora borealis, show up at night when the sky is dark. It’s like a celestial ballet of light dancing across the night sky, with a colour palette of green, blue, and sometimes even pink and violet"}</div>
+<div className='note_area'>{selectItm.note===""?"The lights, which are also called aurora borealis, show up at night when the sky is dark. It’s like a celestial ballet of light dancing across the night sky, with a colour palette of green, blue, and sometimes even pink and violet":(selectItm.note??"The lights, which are also called aurora borealis, show up at night when the sky is dark. It’s like a celestial ballet of light dancing across the night sky, with a colour palette of green, blue, and sometimes even pink and violet")}</div>
 </div>
 
 
@@ -30,7 +30,10 @@ function Overview({selectItm,no_select,AddToCart,selectState}){
               quantity:1,
               Item_Id:"0000000002589"
             });no_select();}}
-            onfunc2={()=>no_select()}/>
+            onfunc2={()=>{
+              DeleteItem();
+              no_select();
+              }}/>
 </div>
 );
 }
@@ -45,7 +48,8 @@ const mapStatetoProps=(state)=>{
 const mapDispatchtoProps=dispatch=>{
     return {
         no_select:()=>dispatch(Creator.select_no_item()),
-        AddToCart:(data)=>dispatch(Creator.AddItemToCart(data))
+        AddToCart:(data)=>dispatch(Creator.AddItemToCart(data)),
+        DeleteItem:()=>dispatch(Creator.DeleteCartItemAsync())
     }
   } 
 

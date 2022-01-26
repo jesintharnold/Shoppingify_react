@@ -4,14 +4,29 @@ import Exbtn from './ExpandaleBtn/ExBtn';
 import Savecontainer from './Bottombar/Savecontainer';
 import Optioncontainer from './Bottombar/Optioncontainer';
 import Additem from './AddItem/Additem';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import * as Creator from '../../Redux/ActionCreators';
 import Overview from './Overview/overview';
 
-function Rightmainbar({Increment,Decrement,cartData,cartLoading,cartName,Delete,UpdateName,selectState,CheckedState}){
+function Rightmainbar({Increment,Decrement,cartData,Postcart,cartLoading,cartName,Delete,UpdateName,selectState,CheckedState,Getcart}){
     const [tab,setTab]=useState('');
     const [edit,setEdit]=useState(false);    
+
+
+    useEffect(()=>{
+        if(localStorage.getItem("access_Id")){
+            Getcart();
+            // Postcart();
+        }
+    },[])
+
+
+    function save_cont(data){
+      UpdateName(data);
+      Postcart("Active");
+    };
+
 return(
 <div className='_main_bar'> 
 <div className="RightMain">
@@ -45,7 +60,7 @@ return(
 
 </div>
 {(!selectState&&!edit&&tab==='')?<Optioncontainer save_bt={`Complete`} className={`_complete`}/>:''}
-{(edit&&!selectState)?<Savecontainer val={cartName} savebtEdit={setEdit} save_dispatch={UpdateName}/>:''}
+{(edit&&!selectState)?<Savecontainer val={cartName} savebtEdit={setEdit} save_dispatch={save_cont}/>:''}
 </div>
 <Additem style={tab==='AddItem'?{right:'0%'}:{right:'-105%'}} set={setTab}/>
 <Overview/>
@@ -68,7 +83,9 @@ return {
     Decrement:(data)=>dispatch(Creator.DecCartQty(data)),
     Delete:(data)=>dispatch(Creator.DeleteCartItem(data)),
     UpdateName:(data)=>dispatch(Creator.UpdateCartName(data)),
-    CheckedState:(data)=>dispatch(Creator.ChangeCheckedState(data))
+    CheckedState:(data)=>dispatch(Creator.ChangeCheckedState(data)),
+    Getcart:()=>dispatch(Creator.GetCartDataAsync()),
+    Postcart:(data)=>dispatch(Creator.PostCartDataAsync(data))
 }
 } 
 export default connect(mapStatetoProps,mapDispatchtoProps)(Rightmainbar)

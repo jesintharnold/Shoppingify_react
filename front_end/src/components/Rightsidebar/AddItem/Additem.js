@@ -1,12 +1,12 @@
 import './Additem.scss';
 import {useEffect, useState} from 'react';
 import Optioncontainer from '../Bottombar/Optioncontainer';
-import * as Creator from '../../../Redux/ActionConstant';
+import * as Creator from '../../../Redux/ActionCreators';
 import {connect} from 'react-redux';
 
-function Additem({style,set,cartData}){
+function Additem({style,set,cartData,PostCart}){
 
-    let initial={name:"",note:"",url:"",category:""};
+    let initial={name:"",note:"",url:"",category:"",categoryID:""};
     const [frm,setfrm]=useState(initial);
     const [err,setErr]=useState({});
     const [submit,setSubmit]=useState(false);
@@ -38,13 +38,19 @@ function Additem({style,set,cartData}){
        }
 
        if(Object.keys(err).length===0 && submit){
+
            console.log("No Errors -- are given");     //dispatch of add item goes here
+           PostCart(frm);
+           set('');
+           setfrm(initial);
+
+
        }
 
-    },[err,submit,visible,frm.category])
+    },[err,submit,visible])
 
     function setFrmchange(data){
-        setfrm({...frm,category:data});
+        setfrm({...frm,category:data.name,categoryID:data._Id});
         setVisible(true);
     }
 
@@ -71,7 +77,7 @@ function Additem({style,set,cartData}){
         <input id="category" type="text" placeholder="Enter a category" value={frm.category} onChange={e=>onvalChange(e)}/>
         {err.category?<p>{err.category}</p>:''}
         <div className="search_recommends" style={visible?{visibility:"hidden"}:{visibility:"visible"}}>
-         {cartData.filter(p=>p.category.name.toLowerCase().includes(frm.category)).map((c)=><div key={c.category.name} onClick={()=>setFrmchange(c.category.name)}>{c.category.name}</div>)} 
+         {cartData.filter(p=>(p.category.name)??"".toLowerCase().includes(frm.category)).map((c)=><div key={c.category.name} onClick={()=>setFrmchange(c.category)}>{c.category.name}</div>)} 
         </div>
         </div>
         </form>
@@ -93,7 +99,7 @@ const mapStatetoProps=(state)=>{
     
     const mapDispatchtoProps=dispatch=>{
     return {
-        
+        PostCart:(data)=>dispatch(Creator.PostItemDataAsync(data))
     }
     } 
     export default connect(mapStatetoProps,mapDispatchtoProps)(Additem)

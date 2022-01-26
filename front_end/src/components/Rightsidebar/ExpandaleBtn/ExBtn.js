@@ -11,7 +11,7 @@ function Exbtn({Inc,Dec,cat_name,items,Del,edit,dipatch}){
     
     return (
         <React.Fragment>
-         <span className="cat_name">{cat_name}</span>
+         <span className="cat_name">{cat_name??"Deleted"}</span>
          {items.map((Itm,index_)=>(
          
         <div className="category_item" key={`cat-Item-${index_}`} >
@@ -27,7 +27,7 @@ function Exbtn({Inc,Dec,cat_name,items,Del,edit,dipatch}){
         <span className='box'></span> 
         </label>
         </>:""}
-        <p>{Itm.name}</p>
+        <p>{Itm.name??"Deleted"}</p>
         </div>
 
         <div className={edit?`pcs hover_active`:'pcs'} >

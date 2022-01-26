@@ -4,6 +4,9 @@ const {itemcontrollerget,getcartcontroller,postcartcontroller,historycontroller,
 const {googleoauth}=require('../controllers/googleOauthController');
 const checkauth=require('../middleware/protected-routes');
 
+
+//route.use(Headers);
+
 /**
  * @swagger
  * /cart:

@@ -5,11 +5,11 @@ const getAllItemSchema=Joi.object().keys({
 
 const addItemSchema=Joi.object().keys({
     name:Joi.string().required(),
-    note:Joi.string().trim(),
-    imageURL:Joi.string().trim(),
+    note:Joi.string().trim().allow('').optional(),
+    imageURL:Joi.string().trim().allow('').optional(),
     category:Joi.string().trim().required(),
     userID:Joi.string().trim().max(24).required(),
-    categoryID:Joi.string().trim().max(24)
+    categoryID:Joi.string().trim().max(24).allow('').optional()
 });
 
 const deleteItemSchema=Joi.object().keys({
@@ -23,14 +23,13 @@ const historyCartSchema=Joi.object().keys({
 });
 
 const postCartSchema=Joi.object().keys({
-cartID:Joi.string().trim().max(24),
-listName:Joi.string().trim(),
-activeList:Joi.boolean().required(),
-status:Joi.string(),
+cartID:Joi.string().trim().allow('').max(24).optional(),
+listName:Joi.string().trim().optional(),
+status:Joi.string().required(),
 userID:Joi.string().trim().max(24).required(),
 items:Joi.array().items(Joi.object({
     category_ID:Joi.string().trim().max(24).required(),
-    item_ID:Joi.string().trim().max(24).required(),
+    Item_ID:Joi.string().trim().max(24).required(),
     quantity:Joi.number().required(),
     checked:Joi.boolean().required()
 })).required()

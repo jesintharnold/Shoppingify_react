@@ -111,7 +111,7 @@ class HistoryDAO{
          {
           $project:{
            items:1,status:1,
-           User_ID:1,DOC:1,Active_list:1,ListName:1,
+           User_ID:1,DOC:1,Active_list:1,listName:1,
           "address":{ "$arrayElemAt": [ "$address", 0 ] }
           } 
           },
@@ -121,7 +121,7 @@ class HistoryDAO{
           user_ID:{$first:"$User_ID"},
           status:{$first:"$status"},
           DOC:{$first:"$DOC"},
-          ListName:{$first:"$ListName"},
+          listName:{$first:"$listName"},
           
           items:{
           $push:{
@@ -147,22 +147,24 @@ class HistoryDAO{
       }
 
     static async postActiveCart(cartID,userID,listName,items,status){
+
+      logger.error(items);
     
       let _items=items.map(dat=>Object.assign({},dat,{category_ID:ObjectId(dat.category_ID),Item_ID:ObjectId(dat.Item_ID)}));
+
+      logger.warn(_items);
+
 
       try{
         await history_collection.updateMany({"User_ID":ObjectId(userID)},{$set:{Active_list:false}});
       
-      if(cartID){
-         
-         logger.warn(`ObjectID changing started \n`);
-         
+      if(cartID){         
          let _res=await history_collection.updateOne(
            {"User_ID":ObjectId(userID),"_id":ObjectId(cartID)},
            {
              $set:{
-              ListName:listName,
-              Active_list:true,
+              listName:listName,
+              Active_list:status==="Active",
               status:status,
               items:_items
              }
@@ -176,7 +178,8 @@ class HistoryDAO{
           status : status,
           User_ID :ObjectId(userID),
           items : _items,
-          Active_list:true
+          Active_list:true,
+          DOC:new Date().toISOString().toString()
          });
          _res.modifiedCount=0;
          return _res;

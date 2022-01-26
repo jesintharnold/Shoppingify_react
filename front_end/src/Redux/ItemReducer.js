@@ -12,7 +12,9 @@ const InitialState={
             imageURL:null,
             name:null,
             category:null,
-            note:null
+            note:null,
+            itemID:null,
+            categoryID:null
         }
     },
     filter:{
@@ -53,7 +55,7 @@ export const ItemReducer=(state=InitialState,{type,payload})=>{
        case Actiontypes.GET_ALL_ITEM:{
            return {
            ...state,
-           data:payload.Items,
+           data:payload,
            Loading:false,
            SelectedData:null,
            filter:{
@@ -116,12 +118,7 @@ export const ItemReducer=(state=InitialState,{type,payload})=>{
             ...state,
             SelectedItem:{
              status:false,
-             data:{
-                imageURL:null,
-                name:null,
-                category:null,
-                note:null
-            }
+             data:state.data
          }
         }
     }
