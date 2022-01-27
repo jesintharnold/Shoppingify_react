@@ -8,16 +8,17 @@ import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import * as Creator from '../../Redux/ActionCreators';
 import Overview from './Overview/overview';
+import Modal from '../Model/Modal';
 
 function Rightmainbar({Increment,Decrement,cartData,Postcart,cartLoading,cartName,Delete,UpdateName,selectState,CheckedState,Getcart}){
     const [tab,setTab]=useState('');
     const [edit,setEdit]=useState(false);    
+    const [cancel,setCancel]=useState(false);
 
 
     useEffect(()=>{
         if(localStorage.getItem("access_Id")){
             Getcart();
-            // Postcart();
         }
     },[])
 
@@ -59,11 +60,20 @@ return(
 </div>
 
 </div>
-{(!selectState&&!edit&&tab==='')?<Optioncontainer save_bt={`Complete`} className={`_complete`}/>:''}
+{(!selectState&&!edit&&tab==='')?<Optioncontainer save_bt={`Complete`} className={`_complete`} onfunc2={()=>{
+    setCancel(!cancel);
+}} onfunc1={()=>{
+    Postcart("completed");
+}} />:''}
 {(edit&&!selectState)?<Savecontainer val={cartName} savebtEdit={setEdit} save_dispatch={save_cont}/>:''}
 </div>
 <Additem style={tab==='AddItem'?{right:'0%'}:{right:'-105%'}} set={setTab}/>
 <Overview/>
+{cancel?<Modal cancel={()=>{
+    setCancel(false);
+}} yes={()=>{
+    Postcart("cancelled");
+}}/>:''}
 </div>
 );
 }

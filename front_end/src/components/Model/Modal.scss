@@ -1,0 +1,61 @@
+.modal{
+    background-color:rgba(0, 0, 0, 0.4);
+    position: absolute;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    height:100%;
+    z-index:999;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+
+    .modal_center{
+        font-family: Quicksand;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 1.2rem;
+        line-height: 30px;
+        color: #34333A;
+        width:30rem;
+        background-color:white;
+        box-sizing: border-box;
+        margin:1rem;
+        border-radius:1rem;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        span{
+           margin:1em 2rem 1rem 2rem;
+           display: block;
+        }
+        .opt_{
+          display: flex;
+          margin:0.8rem;
+          gap:1rem;
+          flex-direction: row-reverse;
+          button{
+              outline: none;
+              border:none;
+              font-size:1rem;
+              height:100%;
+              box-sizing: border-box;
+              padding:0.5rem 1rem;
+              border-radius:0.3rem;
+          }
+
+          .red{
+            font-family: Quicksand;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 16px;
+            line-height: 20px;
+            color: #FFFFFF;
+            background: rgba(235, 87, 87, 1);
+            
+          }
+        }
+    }
+}
