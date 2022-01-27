@@ -2,6 +2,8 @@ import './overview.scss';
 import {connect} from 'react-redux';
 import * as Creator from '../../../Redux/ActionCreators';
 import Optioncontainer from '../Bottombar/Optioncontainer';
+import toast from 'react-hot-toast';
+
 function Overview({selectItm,no_select,AddToCart,selectState,DeleteItem}){
     return(
 <div className='overview' style={selectState?{right:"0%"}:{right:"-100%"}}> 
@@ -29,7 +31,14 @@ function Overview({selectItm,no_select,AddToCart,selectState,DeleteItem}){
               category_name:selectItm.category,
               quantity:1,
               Item_Id:"0000000002589"
-            });no_select();}}
+            });
+
+            toast.success(`${selectItm.name} added to cart`,{
+              duration:1000,
+              position:'bottom-left'
+            });
+            
+            no_select();}}
             onfunc2={()=>{
               DeleteItem();
               no_select();

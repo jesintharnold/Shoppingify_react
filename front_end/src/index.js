@@ -15,6 +15,7 @@ import Auth from './Auth/Auth';
 import {AuthRedirect,LoginProtect} from './Auth/AuthRedirect';
 import Notfound from './Auth/Notfound';
 import PrivateRoute from './Auth/Protectedroutes';
+import {Toaster} from 'react-hot-toast';
 
 
 ReactDOM.render(
@@ -22,6 +23,10 @@ ReactDOM.render(
   <Provider store={redux_store}>
   <BrowserRouter>
     <Navbar/> 
+    <Toaster containerStyle={{ 
+    left:100,
+    bottom:100
+   }} />
     <Switch>
     <LoginProtect exact path="/login" Comp={Auth} />
     <Route exact path="/login/auth/:id_token/:id" component={AuthRedirect} />

@@ -3,6 +3,7 @@ import {redux_store} from './Store'
 import axios from 'axios'
 import {cart_get,History_get,cart_post} from './utils/Redux_utils';
 import config from "../config/default.json";
+import toast from 'react-hot-toast';
 
 //---------CART-ACTION-CREATORS --------------
 export const GetCartData=(payload)=>{
@@ -81,9 +82,9 @@ export const GetCartDataAsync=()=>{
                 }))
             });
              }else{
-                   console.log("No Data");
+                make_toast_error({text:"No active cart found",status:true})
              }
-        })
+        }).catch(e=>make_toast_error({payload:"Cart",saving:"fetching",status:false}))
     }
 }
 
@@ -92,8 +93,6 @@ export const PostCartDataAsync=(payload)=>{ //
 
         let data_=redux_store.getState().cartItems;
         let dat_=await cart_post(data_.data);
-        console.log(dat_);
-        
         await axios.post(`${config.APIurl}/cart`,{
             listName :data_.name,
             status : payload.toString(),
@@ -101,18 +100,9 @@ export const PostCartDataAsync=(payload)=>{ //
             items : dat_,
             cartID :data_.CartID
         }).then(data=>{
-            console.log(data);
-                   dispatch(GetCartDataAsync());
-        })
-
-        
-        console.log({
-            listName :data_.name,
-            status : payload,
-            userID : localStorage.getItem("access_Id") ,
-            items : dat_,
-            cartID :data_.CartID
-        });
+            make_toast_error({text:`Cart saved`,status:true})
+            dispatch(GetCartDataAsync());
+        }).catch(e=>make_toast_error({payload:"Cart",saving:"saving",status:false}))
          
     }
 }
@@ -123,13 +113,7 @@ export const PostCartDataAsync=(payload)=>{ //
 // GETCARTASYNC
 // SAVECARTASYNC
 
-//-----------MAKE-TOAST----------------
-export const MakeToast=(payload)=>{
-    return {
-        type:Actiontypes.MAKE_TOAST,
-        payload:payload
-    }
-}
+
 
 //------------ITEM-ACTION-CREATOR-------
 export const GetItemData=(payload)=>{
@@ -152,19 +136,41 @@ export const ItemLoading=()=>{
     }
 }
 
+
+//-----------MAKE-TOAST----------------
+
+function make_toast_error({payload:payload,saving:saving,status:status,text:text}){
+    if(status){
+        toast.success(`${text}`,{
+            duration:1000,
+            position:'bottom-left'
+          });
+
+    }else{
+          toast.error(`Error while ${saving} ${payload}`,{
+            duration:1000,
+            position:'bottom-left'
+          });
+    }
+}
+
+
+
+
+
 export const GetItemDataAsync=()=>{
     return async dispatch=>{
         dispatch(ItemLoading());
-        await axios.get(`${config.APIurl}/items`,{params:{userID:localStorage.getItem("access_Id")}}).then(data=>{
+        let a=await axios.get(`${config.APIurl}/items`,{params:{userID:localStorage.getItem("access_Id")}}).then(data=>{
+
              if(data.data){
-
-                
-
                 dispatch(GetItemData(data.data.Item));
              }else{
-                console.log("No Data");
+                make_toast_error({text:"No Items found",status:true})
              }
-        })
+        }).catch(e=>make_toast_error({payload:'Items',saving:'fetching',status:false}));
+
+        
     }
 }
 
@@ -178,9 +184,9 @@ export const PostItemDataAsync=(payload)=>{
             userID:localStorage.getItem("access_Id"),
             categoryID:payload.categoryID??null
         }).then(data=>{
-            // console.log(data);
+            make_toast_error({text:"Item saved",status:true}) 
            dispatch(GetItemDataAsync());
-       })
+       }).catch(e=>make_toast_error({payload:'Items',saving:'saving',status:false}))
     
 
 
@@ -253,9 +259,9 @@ export const GetHistoryDataAsync=()=>{
                 console.log(data.data.Cart);
                 History_change(data.data.Cart).then((a)=>dispatch(GetHistoryData(a)));
              }else{
-                console.log("No Data");
+                make_toast_error({text:"No active History",status:true})
              }
-        })
+        }).catch(e=>make_toast_error({payload:'History',saving:'fetching',status:false}));
     }
 }
 
@@ -265,11 +271,7 @@ export const DeleteCartItemAsync=()=>{
     console.log(payload);
 
     return async dispatch=>{
-        console.log({
-            userID:localStorage.getItem("access_Id"),
-            categoryID:payload.categoryID,
-            itemID:payload.itemID
-        });
+
         await axios.delete(`${config.APIurl}/items`,{
             data:{
             userID:localStorage.getItem("access_Id"),
@@ -277,8 +279,9 @@ export const DeleteCartItemAsync=()=>{
             itemID:payload.itemID
             }
         }).then(data=>{
+            make_toast_error({text:"Item deleted successfully",status:true})
             dispatch(GetItemDataAsync());
-        })
+        }).catch(e=>make_toast_error({payload:'Items',saving:'deleting',status:false}))
     }
 }
 

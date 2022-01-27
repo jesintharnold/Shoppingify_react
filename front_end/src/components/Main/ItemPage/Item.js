@@ -2,7 +2,7 @@ import './Item.scss';
 import React, { useEffect, useState } from 'react';
 import {connect} from 'react-redux';
 import * as Creator from '../../../Redux/ActionCreators';
-
+import toast from 'react-hot-toast';
 function Item({ItemData,AddToCart,filter,NoFilter,SetFilter,SelectItem}){
 
   const [search,searchVal]=useState('');
@@ -41,14 +41,18 @@ return (
         <div className="Item_list">
         {Items.map((Itm,index_)=>(
             <div className='itm_btn' key={`Itm-${index_}`}>
-            <span className="Itm_nam" onClick={()=>SelectItem({
+            <span className="Itm_nam" onClick={()=>{SelectItem({
                 imageURL:Itm.imageURL,
                 name:Itm.name,
                 category:name,
                 note:Itm.note,
                 itemID:Itm.Itm_id,
                 categoryID:_id
-            })}>{Itm.name}</span>
+            });
+            
+
+            
+            }}>{Itm.name}</span>
             <button className="Item_btn" onClick={()=>AddToCart({
               name:Itm.name,
               category_ID:`${_id}`,
