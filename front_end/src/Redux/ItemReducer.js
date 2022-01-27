@@ -86,7 +86,7 @@ export const ItemReducer=(state=InitialState,{type,payload})=>{
                filter:{
                    status:true,
                    data:state.data.map(cat=>Object.assign({},cat,{
-                       items:cat.Items.filter(o=>o.name.toLowerCase().includes(payload.toLowerCase()))
+                       Items:cat.Items.filter(o=>o.name.toLowerCase().includes(payload.toLowerCase()))
                    }))
                }
            }
@@ -97,8 +97,7 @@ export const ItemReducer=(state=InitialState,{type,payload})=>{
            return {
                ...state,
                filter:{
-                status:false,
-                data:null
+                status:false
                }
            }
        }

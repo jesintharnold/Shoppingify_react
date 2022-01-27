@@ -190,6 +190,9 @@ export const PostItemDataAsync=(payload)=>{
 
 
 export const setFiltering=(payload)=>{
+
+    console.log(payload);
+
     return {
         type:Actiontypes.GET_FILTER_DATA,
         payload:payload
