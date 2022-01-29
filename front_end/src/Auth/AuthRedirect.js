@@ -1,9 +1,10 @@
 import React from "react";
-import {useParams,Redirect, Route,useHistory} from "react-router-dom";
+import {useParams,Redirect, Route} from "react-router-dom";
 
 export function AuthRedirect(){
-
+    console.log("Redirect Method is called");
     let {id_token,id}=useParams();
+    console.log(id_token);
     localStorage.setItem("access_token",id_token.split("#")[0]);
     localStorage.setItem("access_Id",id);
     if(id_token.trim()!==""){
@@ -17,6 +18,7 @@ export function AuthRedirect(){
 export function LoginProtect({Comp,...rest}){
     let val=localStorage.getItem("access_token");
     let val_=localStorage.getItem("access_Id");
+   
     return <Route {...rest} render={
         props=>{
         if(val&&val_){

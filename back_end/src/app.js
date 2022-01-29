@@ -9,7 +9,6 @@ const bodyParser = require('body-parser');
 const ItemDAO=require("./dbconfig/items");
 const HistoryDAO=require("./dbconfig/history");
 const UserDAO=require("./dbconfig/user");
-const Headers =require("./middleware/Headers");
 const cors = require('cors')
 
 

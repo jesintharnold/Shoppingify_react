@@ -50,12 +50,8 @@ const googleoauth=async (req,res,next)=>{
                         "refresh_token":refresh_token
                     }});
 
-                    // req.user={
-                    //       email:email,
-                    //       ID:"619a5bd0a01ef280b3b92bd4"
-                    // };
-
-                    res.redirect(`${config.get("clientOrgin")}/login/auth/${access_token}`);
+                    logger.warn(user_find);
+                    res.redirect(`${config.get("clientOrgin")}/login/auth/${access_token}/${user_find.upserted}`);
 
                 }else{
                     let decoded_val=Token.verify(user_find.value.refresh_token);
@@ -64,14 +60,7 @@ const googleoauth=async (req,res,next)=>{
                             let refresh_token=Token.access({name:name,email:email});
                             let updateRefreshToken=await UserDAO.finduser({email:email,user_payload:{refresh_token:refresh_token}});
                         }
-                       
-                    // req.User={
-                    //       email:email,
-                    //       ID:"619a5bd0a01ef280b3b92bd4"
-                    //     }
-
-
-                    logger.warn(req.User);    
+                         
                     res.redirect(`${config.get("clientOrgin")}/login/auth/${access_token}/${user_find.value._id}`);
                     
                 }
