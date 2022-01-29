@@ -23,7 +23,7 @@ const historyCartSchema=Joi.object().keys({
 });
 
 const postCartSchema=Joi.object().keys({
-cartID:Joi.string().trim().allow('').max(24).optional(),
+cartID:Joi.string().trim().allow('').allow(null).max(24).optional(),
 listName:Joi.string().trim().optional(),
 status:Joi.string().required(),
 userID:Joi.string().trim().max(24).required(),

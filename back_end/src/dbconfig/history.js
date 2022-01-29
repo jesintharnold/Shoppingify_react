@@ -158,7 +158,7 @@ class HistoryDAO{
       try{
         await history_collection.updateMany({"User_ID":ObjectId(userID)},{$set:{Active_list:false}});
       
-      if(cartID){         
+      if(cartID!==null){         
          let _res=await history_collection.updateOne(
            {"User_ID":ObjectId(userID),"_id":ObjectId(cartID)},
            {
