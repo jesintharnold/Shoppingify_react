@@ -51,7 +51,7 @@ const googleoauth=async (req,res,next)=>{
                     }});
 
                     logger.warn(user_find);
-                    res.redirect(`${config.get("clientOrgin")}/login/auth/${access_token}/${user_find.upserted}`);
+                    res.redirect(`${config.get("clientOrgin")}/login/auth/${access_token}/${user_find.lastErrorObject.upserted}`);
 
                 }else{
                     let decoded_val=Token.verify(user_find.value.refresh_token);

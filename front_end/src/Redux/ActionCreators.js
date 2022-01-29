@@ -73,16 +73,23 @@ export const GetCartDataAsync=()=>{
         await axios.get(`${config.APIurl}/cart`,{params:{userID:localStorage.getItem("access_Id")}}).then(data=>{
              if(data.data.cart.length>0){
                 dispatch(UpdateCartName(data.data.cart[0].listName));
-                ModifyCartData(data.data).then(a=>{console.log(a);
+                ModifyCartData(data.data).then(a=>{
                 dispatch(GetCartData({
                     a:a,
                     b:data.data.cart[0]._id
                 }))
             });
              }else{
+              dispatch(  GetCartData({
+                a:[],
+                b:null
+            }));
                 make_toast_error({text:"No active cart found",status:true})
              }
-        }).catch(e=>make_toast_error({payload:"Cart",saving:"fetching",status:false}))
+        }).catch(e=>{
+            make_toast_error({payload:"Cart",saving:"fetching",status:false});
+            console.log(e);
+        })
     }
 }
 
@@ -152,10 +159,10 @@ export const GetItemDataAsync=()=>{
     return async dispatch=>{
         dispatch(ItemLoading());
         let a=await axios.get(`${config.APIurl}/items`,{params:{userID:localStorage.getItem("access_Id")}}).then(data=>{
-
-             if(data.data){
+             if(data.data.Item.length>0){
                 dispatch(GetItemData(data.data.Item));
              }else{
+                dispatch(GetItemData([])); 
                 make_toast_error({text:"No Items found",status:true})
              }
         }).catch(e=>make_toast_error({payload:'Items',saving:'fetching',status:false}));
@@ -231,9 +238,10 @@ export const GetHistoryDataAsync=()=>{
     return async dispatch=>{
         dispatch(SetHistoryLoading());
         await axios.get(`${config.APIurl}/history`,{params:{userID:localStorage.getItem("access_Id")}}).then(data=>{
-             if(data.data){
+             if(data.data.Cart.length>0){
                 History_change(data.data.Cart).then((a)=>dispatch(GetHistoryData(a)));
              }else{
+                dispatch(GetHistoryData([]))
                 make_toast_error({text:"No active History",status:true})
              }
         }).catch(e=>make_toast_error({payload:'History',saving:'fetching',status:false}));
