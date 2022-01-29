@@ -6,3 +6,13 @@
 - Check Middleware auth -- JWT
 - Add list check
 - Toast needs to be added 
+
+28/01/2022
+- Toast Added (API Errors and success messages)
+- Check Middleware auth -- JWT
+- Cart val>0
+
+29/01/2022
+- Axios Interceptors Added
+
+  

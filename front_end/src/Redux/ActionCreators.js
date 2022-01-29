@@ -1,11 +1,10 @@
 import { Actiontypes } from "./ActionConstant"
 import {redux_store} from './Store'
-import axios from 'axios'
+import {axios_instance as axios}  from '../Redux/utils/axiosHelpers';
 import {cart_get,History_get,cart_post} from './utils/Redux_utils';
 import config from "../config/default.json";
 import toast from 'react-hot-toast';
 
-//---------CART-ACTION-CREATORS --------------
 export const GetCartData=(payload)=>{
     return {
       type:Actiontypes.GET_CART_ALL,
@@ -72,8 +71,7 @@ export const GetCartDataAsync=()=>{
     return async dispatch=>{
         dispatch(CartLoading());
         await axios.get(`${config.APIurl}/cart`,{params:{userID:localStorage.getItem("access_Id")}}).then(data=>{
-             if(data.data){
-                console.log(data.data.cart);
+             if(data.data.cart.length>0){
                 dispatch(UpdateCartName(data.data.cart[0].listName));
                 ModifyCartData(data.data).then(a=>{console.log(a);
                 dispatch(GetCartData({
@@ -88,9 +86,8 @@ export const GetCartDataAsync=()=>{
     }
 }
 
-export const PostCartDataAsync=(payload)=>{ //
+export const PostCartDataAsync=(payload)=>{ 
     return async dispatch=>{
-
         let data_=redux_store.getState().cartItems;
         let dat_=await cart_post(data_.data);
         await axios.post(`${config.APIurl}/cart`,{
@@ -106,13 +103,6 @@ export const PostCartDataAsync=(payload)=>{ //
          
     }
 }
-
-
-
-
-// GETCARTASYNC
-// SAVECARTASYNC
-
 
 
 //------------ITEM-ACTION-CREATOR-------
@@ -193,8 +183,6 @@ export const PostItemDataAsync=(payload)=>{
     }
 }
 
-
-
 export const setFiltering=(payload)=>{
  return {
         type:Actiontypes.GET_FILTER_DATA,
@@ -221,14 +209,6 @@ export const select_no_item=()=>{
     }
 }
 
-//API GET ALL ITEMS
-// API GET SPECIFIC DETAILS
-
-
-
-//-----------------------------------------------------------------------
-
-
 export const GetHistoryData=(payload)=>{
     return {
         type:Actiontypes.GET_HISTORY_ALL,
@@ -243,20 +223,15 @@ export const SetHistoryLoading=()=>{
 }
 
 
-//MAKE A function 
-
 const History_change=async (payload)=>{
 return await History_get(payload);
 }
-
-//DISPATCH the output
 
 export const GetHistoryDataAsync=()=>{
     return async dispatch=>{
         dispatch(SetHistoryLoading());
         await axios.get(`${config.APIurl}/history`,{params:{userID:localStorage.getItem("access_Id")}}).then(data=>{
              if(data.data){
-                console.log(data.data.Cart);
                 History_change(data.data.Cart).then((a)=>dispatch(GetHistoryData(a)));
              }else{
                 make_toast_error({text:"No active History",status:true})
